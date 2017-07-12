@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     SendSingleKeys();
     std::this_thread::sleep_for(2s);
     SendStrings();
-    std::this_thread::sleep_for(10s);
+    std::this_thread::sleep_for(2s);
 
     return 0;
 }
