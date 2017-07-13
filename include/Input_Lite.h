@@ -3,6 +3,7 @@
 
 namespace SL {
     namespace Input_Lite {
+
         //use already existing codes for special keys
         //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode#Constants_for_keyCode_value
 
@@ -16,7 +17,6 @@ namespace SL {
             OSRIGHT = 92,
             SHIFTLEFT = 16,
             SHIFTRIGHT = 16,
-            CONTEXTMENU = 93,
             ENTER = 13,
             SPACE = 32,
             TAB = 9,
@@ -43,7 +43,7 @@ namespace SL {
 #else 
             SCROLLLOCK = 145,
 #endif 
-#if  __APPLE__
+#if  !__APPLE__
             PAUSE = 19,
 #else 
             PAUSE = 126,
@@ -75,39 +75,42 @@ namespace SL {
             F21 = 132,
             F22 = 133,
             F23 = 134,
-            F24 = 135
+            F24 = 135,
 #endif 
+#if     __APPLE__
+            NUMLOCK = 12,
+#else 
+            NUMLOCK = 144,
+#endif 
+            NUMPAD0 = 96,
+            NUMPAD1 = 97,
+            NUMPAD2 = 98,
+            NUMPAD3 = 99,
+            NUMPAD4 = 100,
+            NUMPAD5 = 101,
+            NUMPAD6 = 102,
+            NUMPAD7 = 103,
+            NUMPAD8 = 104,
+            NUMPAD9 = 105,
+
+            NUMPADADD = 107,
+            NUMPADDECIMAL = 110,
+            NUMPADDIVIDE = 111,
+            NUMPADENTER = 13,
+
+            NUMPADMULTIPLY = 106,
+            NUMPADSUBTRACT = 109
+
 
         };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         void SendKeyUp(char key);
         void SendKeyUp(wchar_t key);
+        void SendKeyUp(SpecialKeyCodes key);
         template <class T> void SendKeyUp(T) = delete;
 
         void SendKeyDown(char key);
         void SendKeyDown(wchar_t key);
+        void SendKeyDown(SpecialKeyCodes key);
         template <class T> void SendKeyDown(T) = delete;
 
         inline void SendKey(char key) {
@@ -118,6 +121,10 @@ namespace SL {
             SendKeyDown(key);
             SendKeyUp(key);
         }
+        inline void SendKey(SpecialKeyCodes key) {
+            SendKeyDown(key);
+            SendKeyUp(key);
+        }
         template <class T> void SendKey(T) = delete;
 
         inline void SendKeys(std::string keys) {
@@ -125,7 +132,6 @@ namespace SL {
                 SendKey(k);
             }
         }
-
         inline void SendKeys(std::wstring keys) {
             for (auto k : keys) {
                 SendKey(k);
