@@ -1,4 +1,6 @@
 # Input_lite
+<p>Linux/Mac <img src="https://travis-ci.org/smasherprog/input_lite.svg?branch=master" /></p>
+<p>Windows <img src="https://ci.appveyor.com/api/projects/status/j80n5swr918y8tts"/><p>
 <p>cross platform input library</p>
 
 <h2>USAGE</h2>
