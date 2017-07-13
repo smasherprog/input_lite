@@ -1,8 +1,13 @@
 ﻿#include "Input_Lite.h"
 #include <string>
+#include <thread>
+#include <chrono>
 
+using namespace std::chrono_literals;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
+    std::this_thread::sleep_for(2s);
 
     SL::Input_Lite::SendKeyDown('H');
     SL::Input_Lite::SendKeyUp('H');
@@ -13,12 +18,12 @@ int main(int argc, char* argv[]) {
     SL::Input_Lite::SendKey('o');
     SL::Input_Lite::SendKey('o');
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
-    //UNICODE SUPPORT!
-    SL::Input_Lite::SendKeyDown((wchar_t)294);//the letter Ħ
-    SL::Input_Lite::SendKeyDown((wchar_t)274);//the letter Ē
-    SL::Input_Lite::SendKeyDown((wchar_t)315);//the letter Ļ
-    SL::Input_Lite::SendKeyDown((wchar_t)315);//the letter Ļ
-    SL::Input_Lite::SendKeyDown((wchar_t)526);//the letter Ȏ
+    // UNICODE SUPPORT!
+    SL::Input_Lite::SendKeyDown((wchar_t)294); // the letter Ħ
+    SL::Input_Lite::SendKeyDown((wchar_t)274); // the letter Ē
+    SL::Input_Lite::SendKeyDown((wchar_t)315); // the letter Ļ
+    SL::Input_Lite::SendKeyDown((wchar_t)315); // the letter Ļ
+    SL::Input_Lite::SendKeyDown((wchar_t)526); // the letter Ȏ
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
@@ -27,11 +32,11 @@ int main(int argc, char* argv[]) {
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
     SL::Input_Lite::SendKeys(std::string("this is a std::string"));
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
-    //unicode
+    // unicode
     SL::Input_Lite::SendKeys(L"ĦĒĻĻȎ");
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKeys(std::wstring(L"ĦĒĻĻȎ"));
-    //SPECIAL KEYS
+    // SPECIAL KEYS
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::NUMPAD0);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::CAPSLOCK);
