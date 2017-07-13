@@ -1,5 +1,9 @@
 # Input_lite
 cross platform input library
+
+<h2>USAGE</h2>
+https://github.com/smasherprog/input_lite/tree/master/Example
+
 ```c++
 
     SL::Input_Lite::SendKeyDown('H');
