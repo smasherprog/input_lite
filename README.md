@@ -1,8 +1,8 @@
 # Input_lite
-cross platform input library
+<p>cross platform input library</p>
 
 <h2>USAGE</h2>
-https://github.com/smasherprog/input_lite/tree/master/Example
+https://github.com/smasherprog/input_lite/blob/master/Test/main.cpp
 
 ```c++
 
