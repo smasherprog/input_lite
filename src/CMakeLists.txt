@@ -8,7 +8,7 @@ endif()
 
 if(WIN32)
     set(INPUT_LITE_PLATFORM_SRC     
-	${CMAKE_CURRENT_SOURCE_DIR}/../src/windows/Input.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/../src/windows/Input.cpp
     )
 
     set(INPUT_LITE_PLATFORM_INC     
@@ -17,19 +17,20 @@ if(WIN32)
     )
 
 elseif(APPLE)
-find_library(corefoundation_lib CoreFoundation)
-find_library(cocoa_lib Cocoa)
-set(INPUT_LITE_PLATFORM_LIBS ${corefoundation_lib} ${cocoa_lib})
+	find_library(corefoundation_lib CoreFoundation)
+	find_library(cocoa_lib Cocoa)
+	set(INPUT_LITE_PLATFORM_LIBS ${corefoundation_lib} ${cocoa_lib})
 
     set(INPUT_LITE_PLATFORM_SRC
+		${CMAKE_CURRENT_SOURCE_DIR}/../src/linux/Input.cpp
     )
     set(INPUT_LITE_PLATFORM_INC
        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ios
        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ios
     )
 else()
-  set(INPUT_LITE_PLATFORM_SRC
-	${CMAKE_CURRENT_SOURCE_DIR}/../src/linux/Input.cpp
+	set(INPUT_LITE_PLATFORM_SRC
+		${CMAKE_CURRENT_SOURCE_DIR}/../src/linux/Input.cpp
     )
   
 	find_package(X11 REQUIRED)
@@ -40,8 +41,8 @@ else()
  		message(FATAL_ERROR "X11 fixes extension is required, but not found!")
 	endif()
 	set(INPUT_LITE_PLATFORM_INC
-       ${CMAKE_CURRENT_SOURCE_DIR}/../include/linux
-       ${CMAKE_CURRENT_SOURCE_DIR}/../src/linux
+		${CMAKE_CURRENT_SOURCE_DIR}/../include/linux
+		${CMAKE_CURRENT_SOURCE_DIR}/../src/linux
 		${X11_INCLUDE_DIR}
     )
 	find_package(Threads REQUIRED)
