@@ -209,5 +209,54 @@ namespace SL {
         void SendKeyDown(SpecialKeyCodes key) {
             SendKey_Impl(key, 0);
         }
+
+        void SendMouseUp(const MouseButtons& button) {
+
+            INPUT inp = { 0 };
+            inp.type = INPUT_MOUSE;
+            switch (button) {
+            case (MouseButtons::LEFT):
+                inp.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+                break;
+            case (MouseButtons::RIGHT):
+                inp.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+                break;
+            case (MouseButtons::MIDDLE):
+                inp.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+                break;
+            default:
+                return;
+            }
+            SendInput(1, &inp, sizeof(INPUT));
+        }
+
+        void SendMouseDown(const MouseButtons& button) {
+
+            INPUT inp = { 0 };
+            inp.type = INPUT_MOUSE;
+            switch (button) {
+            case (MouseButtons::LEFT):
+                inp.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+                break;
+            case (MouseButtons::RIGHT):
+                inp.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+                break;
+            case (MouseButtons::MIDDLE):
+                inp.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
+                break;
+            default:
+                return;
+            }
+            SendInput(1, &inp, sizeof(INPUT));
+        }
+        void SendMouseMove(const Pos& pos) {
+
+            INPUT inp = { 0 };
+            inp.type = INPUT_MOUSE;
+            inp.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
+            inp.mi.dx = (pos.X * 65536) / GetSystemMetrics(SM_CXSCREEN);
+            inp.mi.dy = (pos.Y * 65536) / GetSystemMetrics(SM_CYSCREEN);
+            SendInput(1, &inp, sizeof(INPUT));
+        }
     };
 }
