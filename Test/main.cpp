@@ -1,18 +1,18 @@
 ﻿#include "Input_Lite.h"
-#include <string>
-#include <thread>
 #include <chrono>
 #include <iostream>
+#include <string>
+#include <thread>
 
 using namespace std::chrono_literals;
 
 int main(int argc, char* argv[])
 {
     std::this_thread::sleep_for(4s);
-    for (auto c = ' '; c < 127; c++) {
+    for(auto c = ' '; c < 127; c++) {
         SL::Input_Lite::SendKey(c);
     }
-    
+
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     // UNICODE SUPPORT!
     SL::Input_Lite::SendKeyDown((wchar_t)294); // the letter Ħ
@@ -41,14 +41,53 @@ int main(int argc, char* argv[])
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
 
     std::cout << "Starting Mouse move tests" << std::endl;
-    for (auto x = 0; x < 500; x++) {
+    for(auto x = 0; x < 500; x++) {
         SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ x, 300 });
         std::this_thread::sleep_for(10ms);
     }
-    for (auto y= 0;y< 500; y++) {
+    for(auto y = 0; y < 500; y++) {
         SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ 500, y });
         std::this_thread::sleep_for(10ms);
     }
 
     return 0;
 }
+/*
+Display* dpy;
+dpy = XOpenDisplay(NULL);
+
+KeySym* keysyms = NULL;
+int keysyms_per_keycode = 0;
+int scratch_keycode = 0; 
+int keycode_low, keycode_high;
+XDisplayKeycodes(dpy, &keycode_low, &keycode_high);
+keysyms = XGetKeyboardMapping(dpy, keycode_low, keycode_high - keycode_low, &keysyms_per_keycode);
+
+int i;
+for(i = keycode_low; i <= keycode_high; i++) {
+    int j = 0;
+    int key_is_empty = 1;
+    for(j = 0; j < keysyms_per_keycode; j++) {
+        int symindex = (i - keycode_low) * keysyms_per_keycode + j;
+        if(keysyms[symindex] != 0) {
+            key_is_empty = 0;
+        } else {
+            break;
+        }
+    }
+    if(key_is_empty) {
+        scratch_keycode = i;
+        break;
+    }
+}
+XFree(keysyms);
+XFlush(dpy);
+KeySym sym = XStringToKeysym("U00c4"); // uppercase Z
+KeySym keysym_list[] = { sym, sym };
+XChangeKeyboardMapping(dpy, scratch_keycode, 2, keysym_list, 2);
+KeyCode code = scratch_keycode;
+
+XTestFakeKeyEvent(dpy, code, True, 0);
+XTestFakeKeyEvent(dpy, code, False, 0);
+keysym_list[] = { 0 };
+XChangeKeyboardMapping(dpy, scratch_keycode, 1, keysym_list, 1);*/
