@@ -8,6 +8,7 @@ namespace SL {
         //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode#Constants_for_keyCode_value
 
         enum SpecialKeyCodes {
+
             ALTLEFT = 18,
             ALTRIGHT = 18,
             CAPSLOCK = 20,
@@ -143,5 +144,21 @@ namespace SL {
             }
         }
         template <class T> void SendKeys(T) = delete;
+
+
+        enum MouseButtons {
+            LEFT,
+            MIDDLE,
+            RIGHT
+        };
+        void SendMouseUp(const MouseButtons& button);
+        void SendMouseDown(const MouseButtons& button);
+        inline void SendMouseClick(const MouseButtons& button) {
+            SendMouseDown(button);
+            SendMouseUp(button);
+        }
+        struct Pos { int X = 0; int Y = 0; };
+        void SendMousePosition_AsOffset(const Pos& pos);
+        void SendMousePosition_AsAbsolute(const Pos& pos);
     }
 }

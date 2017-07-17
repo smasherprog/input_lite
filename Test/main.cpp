@@ -2,21 +2,17 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 using namespace std::chrono_literals;
 
 int main(int argc, char* argv[])
 {
-    std::this_thread::sleep_for(2s);
-
-    SL::Input_Lite::SendKeyDown('H');
-    SL::Input_Lite::SendKeyUp('H');
-    SL::Input_Lite::SendKeyDown('e');
-    SL::Input_Lite::SendKeyUp('e');
-    SL::Input_Lite::SendKeyDown('l');
-    SL::Input_Lite::SendKeyUp('l');
-    SL::Input_Lite::SendKey('o');
-    SL::Input_Lite::SendKey('o');
+    std::this_thread::sleep_for(4s);
+    for (auto c = ' '; c < 127; c++) {
+        SL::Input_Lite::SendKey(c);
+    }
+    
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     // UNICODE SUPPORT!
     SL::Input_Lite::SendKeyDown((wchar_t)294); // the letter Ħ
@@ -24,10 +20,6 @@ int main(int argc, char* argv[])
     SL::Input_Lite::SendKeyDown((wchar_t)315); // the letter Ļ
     SL::Input_Lite::SendKeyDown((wchar_t)315); // the letter Ļ
     SL::Input_Lite::SendKeyDown((wchar_t)526); // the letter Ȏ
-    SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
-    SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
-    SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
-    SL::Input_Lite::SendKeys("Hey there");
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::TAB);
     SL::Input_Lite::SendKeys(std::string("this is a std::string"));
@@ -47,6 +39,16 @@ int main(int argc, char* argv[])
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
+
+    std::cout << "Starting Mouse move tests" << std::endl;
+    for (auto x = 0; x < 500; x++) {
+        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ x, 300 });
+        std::this_thread::sleep_for(10ms);
+    }
+    for (auto y= 0;y< 500; y++) {
+        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ 500, y });
+        std::this_thread::sleep_for(10ms);
+    }
 
     return 0;
 }
