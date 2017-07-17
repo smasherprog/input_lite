@@ -14,14 +14,13 @@ namespace Input_Lite
     {
         if(key >= ' ' && key <= '~') {
             char bufkey[2];
-            bufkey[0]=key;
-            bufkey[1] =0;
+            bufkey[0] = key;
+            bufkey[1] = 0;
             auto ky = XStringToKeysym(bufkey);
             auto k = XKeysymToKeycode(display, ky);
             XTestFakeKeyEvent(display, k, pressed, CurrentTime);
 
         } else {
-            
         }
     }
     void SendKey_Impl(wchar_t key, int pressed, Display* display)
@@ -64,5 +63,23 @@ namespace Input_Lite
     void SendKeyDown(SpecialKeyCodes key)
     {
     }
+    void SendMouseUp(const MouseButtons& button)
+    {
+    }
+    void SendMouseDown(const MouseButtons& button)
+    {
+    }
+
+    void SendMouseScroll(int offset)
+    {
+    }
+
+    void SendMousePosition(const Offset& offset)
+    {
+    }
+    void SendMousePosition(const Absolute& absolute)
+    {
+    }
+}
 }
 }
