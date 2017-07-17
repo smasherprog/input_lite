@@ -250,20 +250,29 @@ namespace SL {
             SendInput(1, &inp, sizeof(INPUT));
         }
 
-        void SendMousePosition_Impl(const Pos& pos, int modifier) {
-
+        void SendMousePosition_Impl(int x, int y, int modifier) {
             INPUT inp = { 0 };
             inp.type = INPUT_MOUSE;
             inp.mi.dwFlags = MOUSEEVENTF_MOVE | modifier;
-            inp.mi.dx = (pos.X * 65536) / GetSystemMetrics(SM_CXSCREEN);
-            inp.mi.dy = (pos.Y * 65536) / GetSystemMetrics(SM_CYSCREEN);
+            inp.mi.dx = x;
+            inp.mi.dy = y;
             SendInput(1, &inp, sizeof(INPUT));
         }
-        void SendMousePosition_AsOffset(const Pos& pos) {
-            SendMousePosition_Impl(pos, 0);
+        void SendMousePosition(const Offset& offset) {
+            SendMousePosition_Impl(offset.X, offset.Y, 0);
         }
-        void SendMousePosition_AsAbsolute(const Pos& pos) {
-            SendMousePosition_Impl(pos, MOUSEEVENTF_ABSOLUTE);
+        void SendMousePosition(const Absolute& absolute) {
+            SendMousePosition_Impl(
+                (absolute.X * 65536) / GetSystemMetrics(SM_CXSCREEN),
+                (absolute.Y * 65536) / GetSystemMetrics(SM_CYSCREEN),
+                MOUSEEVENTF_ABSOLUTE);
+        }
+        void SendMouseScroll(int offset) {
+            INPUT inp = { 0 };
+            inp.type = INPUT_MOUSE;
+            inp.mi.dwFlags = MOUSEEVENTF_WHEEL;
+            inp.mi.mouseData = offset * 120;
+            SendInput(1, &inp, sizeof(INPUT));
         }
     };
 }

@@ -9,7 +9,8 @@ using namespace std::chrono_literals;
 int main(int argc, char* argv[])
 {
     std::this_thread::sleep_for(4s);
-    for(auto c = ' '; c < 127; c++) {
+
+    for (auto c = ' '; c < 127; c++) {
         SL::Input_Lite::SendKey(c);
     }
 
@@ -40,16 +41,38 @@ int main(int argc, char* argv[])
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ARROWLEFT);
 
-    std::cout << "Starting Mouse move tests" << std::endl;
-    for(auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ x, 300 });
-        std::this_thread::sleep_for(10ms);
-    }
-    for(auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ 500, y });
-        std::this_thread::sleep_for(10ms);
-    }
 
+    std::cout << "Starting Mouse move tests by Offset" << std::endl;
+    SL::Input_Lite::SendMousePosition(SL::Input_Lite::Absolute{ 100, 100 });
+    for (auto x = 0; x < 500; x++) {
+        SL::Input_Lite::SendMousePosition(SL::Input_Lite::Offset{ 1, 0 });
+        std::this_thread::sleep_for(10ms);
+    }
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendMousePosition(SL::Input_Lite::Offset{ 0, 1 });
+        std::this_thread::sleep_for(10ms);
+    }
+    std::cout << "Starting Mouse move tests by Absolute" << std::endl;
+    for (auto x = 0; x < 500; x++) {
+        SL::Input_Lite::SendMousePosition(SL::Input_Lite::Absolute{ x, 300 });
+        std::this_thread::sleep_for(10ms);
+    }
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendMousePosition(SL::Input_Lite::Absolute{ 500, y });
+        std::this_thread::sleep_for(10ms);
+    }
+    std::cout << "Starting Mouse Click tests " << std::endl;
+    SL::Input_Lite::SendMouseClick(SL::Input_Lite::MouseButtons::RIGHT);
+    SL::Input_Lite::SendMouseClick(SL::Input_Lite::MouseButtons::LEFT);
+    std::cout << "Starting Mouse wheel tests " << std::endl;
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendMouseScroll(1);
+        std::this_thread::sleep_for(10ms);
+    }
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendMouseScroll(-1);
+        std::this_thread::sleep_for(10ms);
+    }
     return 0;
 }
 /*
@@ -58,7 +81,7 @@ dpy = XOpenDisplay(NULL);
 
 KeySym* keysyms = NULL;
 int keysyms_per_keycode = 0;
-int scratch_keycode = 0; 
+int scratch_keycode = 0;
 int keycode_low, keycode_high;
 XDisplayKeycodes(dpy, &keycode_low, &keycode_high);
 keysyms = XGetKeyboardMapping(dpy, keycode_low, keycode_high - keycode_low, &keysyms_per_keycode);
