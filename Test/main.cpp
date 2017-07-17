@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
     std::cout << "Starting Mouse Click tests " << std::endl;
     SL::Input_Lite::SendMouseClick(SL::Input_Lite::MouseButtons::RIGHT);
     SL::Input_Lite::SendMouseClick(SL::Input_Lite::MouseButtons::LEFT);
+    SL::Input_Lite::SendMouseDoubleClick(SL::Input_Lite::MouseButtons::LEFT);
     std::cout << "Starting Mouse wheel tests " << std::endl;
     for (auto y = 0; y < 500; y++) {
         SL::Input_Lite::SendMouseScroll(1);
