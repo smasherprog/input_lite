@@ -42,11 +42,11 @@ int main(int argc, char* argv[])
 
     std::cout << "Starting Mouse move tests" << std::endl;
     for (auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendMouseMove(SL::Input_Lite::Pos{ x, 300 });
+        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ x, 300 });
         std::this_thread::sleep_for(10ms);
     }
     for (auto y= 0;y< 500; y++) {
-        SL::Input_Lite::SendMouseMove(SL::Input_Lite::Pos{ 500, y });
+        SL::Input_Lite::SendMousePosition_AsAbsolute(SL::Input_Lite::Pos{ 500, y });
         std::this_thread::sleep_for(10ms);
     }
 

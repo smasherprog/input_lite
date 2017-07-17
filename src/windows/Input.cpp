@@ -249,14 +249,21 @@ namespace SL {
             }
             SendInput(1, &inp, sizeof(INPUT));
         }
-        void SendMouseMove(const Pos& pos) {
+
+        void SendMousePosition_Impl(const Pos& pos, int modifier) {
 
             INPUT inp = { 0 };
             inp.type = INPUT_MOUSE;
-            inp.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
+            inp.mi.dwFlags = MOUSEEVENTF_MOVE | modifier;
             inp.mi.dx = (pos.X * 65536) / GetSystemMetrics(SM_CXSCREEN);
             inp.mi.dy = (pos.Y * 65536) / GetSystemMetrics(SM_CYSCREEN);
             SendInput(1, &inp, sizeof(INPUT));
+        }
+        void SendMousePosition_AsOffset(const Pos& pos) {
+            SendMousePosition_Impl(pos, 0);
+        }
+        void SendMousePosition_AsAbsolute(const Pos& pos) {
+            SendMousePosition_Impl(pos, MOUSEEVENTF_ABSOLUTE);
         }
     };
 }

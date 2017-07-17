@@ -158,6 +158,7 @@ namespace SL {
             SendMouseUp(button);
         }
         struct Pos { int X = 0; int Y = 0; };
-        void SendMouseMove(const Pos& pos);
+        void SendMousePosition_AsOffset(const Pos& pos);
+        void SendMousePosition_AsAbsolute(const Pos& pos);
     }
 }
