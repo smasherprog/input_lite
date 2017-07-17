@@ -9,39 +9,54 @@ namespace SL
 {
 namespace Input_Lite
 {
-    void SendKey_Impl(char key, int pressed)
+
+    void SendKey_Impl(char key, int pressed, Display* display)
     {
-        auto display = XOpenDisplay(NULL);
         if(key >= ' ' && key <= '~') {
-            XTestFakeKeyEvent(display, XKeysymToKeycode(display, key), pressed, CurrentTime);
+            char bufkey[2];
+            bufkey[0]=key;
+            bufkey[1] =0;
+            auto ky = XStringToKeysym(bufkey);
+            auto k = XKeysymToKeycode(display, ky);
+            XTestFakeKeyEvent(display, k, pressed, CurrentTime);
+
         } else {
+            
         }
-        XCloseDisplay(display);
     }
-    void SendKey_Impl(wchar_t key, int pressed)
+    void SendKey_Impl(wchar_t key, int pressed, Display* display)
     {
-        auto display = XOpenDisplay(NULL);
-        if(key >= ' ' && key <= '~') {
-            XTestFakeKeyEvent(display, XKeysymToKeycode(display, key), pressed, CurrentTime);
+
+        if(key < 128) {
+            SendKey_Impl(static_cast<char>(key), pressed, display);
         } else {
+            auto k = XKeysymToKeycode(display, key);
+            XTestFakeKeyEvent(display, k, pressed, CurrentTime);
         }
-        XCloseDisplay(display);
     }
     void SendKeyUp(char key)
     {
-        SendKey_Impl(key, False);
+        auto display = XOpenDisplay(NULL);
+        SendKey_Impl(key, False, display);
+        XCloseDisplay(display);
     }
     void SendKeyUp(wchar_t key)
     {
-        SendKey_Impl(key, False);
+        auto display = XOpenDisplay(NULL);
+        SendKey_Impl(key, False, display);
+        XCloseDisplay(display);
     }
     void SendKeyDown(wchar_t key)
     {
-        SendKey_Impl(key, True);
+        auto display = XOpenDisplay(NULL);
+        SendKey_Impl(key, True, display);
+        XCloseDisplay(display);
     }
     void SendKeyDown(char key)
     {
-        SendKey_Impl(key, True);
+        auto display = XOpenDisplay(NULL);
+        SendKey_Impl(key, True, display);
+        XCloseDisplay(display);
     }
     void SendKeyUp(SpecialKeyCodes key)
     {
