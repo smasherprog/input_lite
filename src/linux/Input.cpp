@@ -77,9 +77,8 @@ namespace Input_Lite
     void SendMousePosition(const Offset& offset)
     {
     }
-    void SendMousePosition(const Absolute& absolute)
+    void SendMousePosition(const SL::Input_Lite::Absolute& absolute)
     {
     }
-}
 }
 }
