@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 {
     std::this_thread::sleep_for(4s);
 
-    for (auto c = ' '; c < 127; c++) {
+    for (auto c = ' '; c < '~'; c++) {
         SL::Input_Lite::SendKey(c);
     }
 
