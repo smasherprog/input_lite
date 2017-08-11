@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
     SL::Input_Lite::SendKeys(L"ĦĒĻĻȎ");
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKeys(std::wstring(L"ĦĒĻĻȎ"));
+
     // SPECIAL KEYS
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::ENTER);
     SL::Input_Lite::SendKey(SL::Input_Lite::SpecialKeyCodes::NUMPAD0);
