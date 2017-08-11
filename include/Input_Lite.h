@@ -1,5 +1,19 @@
 #pragma once
 #include <string>
+#include <functional>
+#include <memory>
+
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif __APPLE__
+
+#elif __linux__
+
+#else
+#error "Unknown Operating System!"
+#endif
+
 #undef DELETE
 
 namespace SL {
@@ -110,8 +124,6 @@ namespace SL {
 
 
         };
-        bool ProcessKeyUp(size_t key);
-        bool ProcessKeyDown(size_t key);
 
         void SendKeyUp(char key);
         void SendKeyUp(wchar_t key);
@@ -176,7 +188,41 @@ namespace SL {
         struct AbsolutePos { int X = 0; int Y = 0; };
         void SendMousePosition(const AbsolutePos& absolute);
 
+        class IInputManager
+        {
+        public:
+            virtual ~IInputManager() {}
+#ifdef WIN32
+            virtual bool WindowProc(
+                _In_ HWND   hwnd,
+                _In_ UINT   uMsg,
+                _In_ WPARAM wParam,
+                _In_ LPARAM lParam
+            ) = 0;
+#elif __APPLE__
 
+#elif __linux__
 
+#else
+#error "Unknown Operating System!"
+#endif
+
+        };
+        class IInputConfiguration
+        {
+        public:
+            virtual ~IInputConfiguration() {}
+
+            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(char, bool)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(wchar_t, bool)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(SpecialKeyCodes, bool)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onMouse(const std::function<void(MouseButtons)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onMouse(const std::function<void(Offset)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onMouse(const std::function<void(AbsolutePos)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onMouseScroll(const std::function<void(int)>& cb) = 0;
+            virtual std::shared_ptr<IInputManager> Build() = 0;
+        };
+
+        std::shared_ptr<IInputConfiguration> CreateInputConfiguration();
     }
 }
