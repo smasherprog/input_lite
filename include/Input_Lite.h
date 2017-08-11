@@ -104,6 +104,9 @@ namespace SL {
 
 
         };
+        bool ProcessKeyUp(size_t key);
+        bool ProcessKeyDown(size_t key);
+
         void SendKeyUp(char key);
         void SendKeyUp(wchar_t key);
         void SendKeyUp(SpecialKeyCodes key);
