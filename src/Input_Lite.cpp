@@ -10,30 +10,37 @@ namespace SL {
         {
             std::shared_ptr<InputManager> Impl;
         public:
+
             InputConfiguration(const  std::shared_ptr<InputManager>& impl) : Impl(impl) {}
             virtual ~InputConfiguration() {}
 
-            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(char, bool)>& cb) override {
-                assert(!Impl->onKeyc);
-                Impl->onKeyc = cb;
+
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const PlatformIndependentKeyEvent&)>& cb)  override {
+                assert(!Impl->OnPlatformIndependentKeyEvent);
+                Impl->OnPlatformIndependentKeyEvent = cb;
                 return std::make_shared<InputConfiguration>(Impl);
             }
-            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(wchar_t, bool)>& cb) override {
-                assert(!Impl->onKeywc);
-                Impl->onKeywc = cb;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const PlatformIndependentMouseEvent&)>& cb)  override {
+                assert(!Impl->OnPlatformIndependentMouseEvent);
+                Impl->OnPlatformIndependentMouseEvent = cb;
                 return std::make_shared<InputConfiguration>(Impl);
             }
-            virtual std::shared_ptr<IInputConfiguration> onKey(const std::function<void(SpecialKeyCodes, bool)>& cb)override {
-                assert(!Impl->onKeysk);
-                Impl->onKeysk = cb;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MouseScroll>&)>& cb) override {
+                assert(!Impl->OnMouseScroll);
+                Impl->OnMouseScroll = cb;
                 return std::make_shared<InputConfiguration>(Impl);
             }
-            virtual std::shared_ptr<IInputConfiguration> onMouse(const std::function<void(MouseButtons, bool)>& cb) override {
-                assert(!Impl->onMouse);
-                Impl->onMouse = cb;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionOffset>&)>& cb)  override {
+                assert(!Impl->OnMousePositionOffset);
+                Impl->OnMousePositionOffset = cb;
                 return std::make_shared<InputConfiguration>(Impl);
             }
-            virtual std::shared_ptr<IInputManager> start() override {
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionAbsolute>&)>& cb)  override {
+                assert(!Impl->OnMousePositionAbsolute);
+                Impl->OnMousePositionAbsolute = cb;
+                return std::make_shared<InputConfiguration>(Impl);
+            }
+            virtual std::shared_ptr<IInputManager> Build() override {
                 return Impl;
             }
         };
