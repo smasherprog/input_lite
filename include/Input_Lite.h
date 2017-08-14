@@ -8,7 +8,7 @@
 namespace SL {
     namespace Input_Lite {
         //codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
-        enum KeyCodes : char {
+        enum KeyCodes : unsigned char {
             KEY_A = 4,
             KEY_B = 5,
             KEY_C = 6,
@@ -127,51 +127,51 @@ namespace SL {
             KEY_RightControl = 228,
             KEY_RightShift = 229,
             KEY_RightAlt = 230,
-            KEY_RightGUI = 231
-
+            KEY_RightGUI = 231,
+            INVALID = 255
         };
+
         enum MouseButtons : unsigned char {
             LEFT,
             MIDDLE,
-            RIGHT
+            RIGHT,
+            INVALID=255
         };
-        struct PlatformIndependentKeyEvent {
+
+        int ConvertToNative(KeyCodes key);
+        KeyCodes ConvertToKeyCode(int key);
+
+        int ConvertToNative(MouseButtons mousebutton);
+        MouseButtons ConvertToMouseButton(int mousebutton);
+
+        struct KeyEvent {
             bool Pressed;
             KeyCodes Key;
         };
-        struct PlatformIndependentMouseEvent {
+        struct MouseEvent {
             bool Pressed;
             MouseButtons Button;
         };
-        struct MouseScroll {int Offset;};
+        struct MouseScroll { int Offset; };
         struct MousePositionOffset { int X = 0; int Y = 0; };
         struct MousePositionAbsolute { int X = 0; int Y = 0; };
-        template<typename MOVEKIND>struct MouseMoveEvent{ MOVEKIND Position;};
+        template<typename MOVEKIND>struct MouseMoveEvent { MOVEKIND Position; };
 
-        void SendInput(const PlatformIndependentKeyEvent& e );
-        void SendInput(const PlatformIndependentMouseEvent& e);
+        void SendInput(const KeyEvent& e);
+        void SendInput(const MouseEvent& e);
         void SendInput(const MouseMoveEvent<MouseScroll>& e);
         void SendInput(const MouseMoveEvent<MousePositionOffset>& e);
         void SendInput(const MouseMoveEvent<MousePositionAbsolute>& e);
 
-        struct PlatformSpecificKeyEvent {
-            bool Pressed;
-            int Key;
-        };
-
-        struct PlatformSpecificMouseEvent {
-            bool Pressed;
-            int Button;
-        };
         class IInputManager
         {
         public:
             virtual ~IInputManager() {}
-            virtual bool PushEvent(const PlatformSpecificKeyEvent& e) = 0;
-            virtual bool PushEvent(const PlatformSpecificMouseEvent& e) = 0;
+            virtual bool PushEvent(const KeyEvent& e) = 0;
+            virtual bool PushEvent(const MouseEvent& e) = 0;
 
             virtual bool PushEvent(const MouseMoveEvent<MouseScroll>& pos) = 0;
-            virtual bool PushEvent(const MouseMoveEvent<MousePositionOffset>& pos ) = 0;
+            virtual bool PushEvent(const MouseMoveEvent<MousePositionOffset>& pos) = 0;
             virtual bool PushEvent(const MouseMoveEvent<MousePositionAbsolute>& pos) = 0;
 
         };
@@ -180,8 +180,8 @@ namespace SL {
         public:
             virtual ~IInputConfiguration() {}
 
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const PlatformIndependentKeyEvent&)>& cb) = 0;
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const PlatformIndependentMouseEvent&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseEvent&)>& cb) = 0;
             virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MouseScroll>&)>& cb) = 0;
             virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionOffset>&)>& cb) = 0;
             virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionAbsolute>&)>& cb) = 0;
