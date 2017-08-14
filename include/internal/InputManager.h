@@ -21,20 +21,21 @@ namespace SL {
 
             void Run();
         public:
+
             virtual ~InputManager();
 
             virtual bool PushEvent(const KeyEvent& e) override;
-            virtual bool PushEvent(const MouseEvent& e)  override;
+            virtual bool PushEvent(const MouseButtonEvent& e)  override;
 
-            virtual bool PushEvent(const MouseMoveEvent<MouseScroll>& pos)  override;
-            virtual bool PushEvent(const MouseMoveEvent<MousePositionOffset>& pos)  override;
-            virtual bool PushEvent(const MouseMoveEvent<MousePositionAbsolute>& pos)  override;
+            virtual bool PushEvent(const MouseScrollEvent& pos)  override;
+            virtual bool PushEvent(const MousePositionOffsetEvent& pos)  override;
+            virtual bool PushEvent(const MousePositionAbsoluteEvent& pos)  override;
 
             std::function<void(const KeyEvent&)> OnKeyEvent;
-            std::function<void(const MouseEvent&)> OnMouseEvent;
-            std::function<void(const MouseMoveEvent<MouseScroll>&)> OnMouseScroll;
-            std::function<void(const MouseMoveEvent<MousePositionOffset>&)> OnMousePositionOffset;
-            std::function<void(const MouseMoveEvent<MousePositionAbsolute>&)> OnMousePositionAbsolute;
+            std::function<void(const MouseButtonEvent&)> OnMouseButtonEvent;
+            std::function<void(const MouseScrollEvent&)> OnMouseScroll;
+            std::function<void(const MousePositionOffsetEvent&)> OnMousePositionOffset;
+            std::function<void(const MousePositionAbsoluteEvent&)> OnMousePositionAbsolute;
             void start() {
                 Thread = std::thread(&SL::Input_Lite::InputManager::Run, this);
             }

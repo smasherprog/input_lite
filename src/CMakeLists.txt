@@ -9,7 +9,6 @@ endif()
 if(WIN32)
     set(INPUT_LITE_PLATFORM_SRC     
 		${CMAKE_CURRENT_SOURCE_DIR}/../src/windows/Input.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/../src/windows/InputManager.cpp
     )
 
     set(INPUT_LITE_PLATFORM_INC     
@@ -58,6 +57,7 @@ endif()
 
 set(INPUT_LITE_COMMON_SRC 
 	${CMAKE_CURRENT_SOURCE_DIR}/../include/internal/InputManager.h
+	${CMAKE_CURRENT_SOURCE_DIR}/../src/internal/InputManager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/../include/Input_Lite.h
 	${CMAKE_CURRENT_SOURCE_DIR}/../src/Input_Lite.cpp
 )

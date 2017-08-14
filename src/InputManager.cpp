@@ -21,10 +21,10 @@ namespace SL {
             Ready = true;
             return true;
         }
-        bool InputManager::PushEvent(const MouseButtonEvent& e) {
-            if (e.Button == MouseButtons::INVALID || !OnMouseButtonEvent) { return false; }//key not regonized
+        bool InputManager::PushEvent(const MouseEvent& e) {
+            if (e.Button == MouseButtons::INVALID || !OnMouseEvent) { return false; }//key not regonized
             auto tmp = [&, e] {
-                OnMouseButtonEvent(e);
+                OnMouseEvent(e);
             };
             std::lock_guard<std::mutex> lk(Mutex);
             Events.emplace_back(tmp);
@@ -32,7 +32,7 @@ namespace SL {
             return true;
         }
 
-        bool InputManager::PushEvent(const MouseScrollEvent& pos) {
+        bool InputManager::PushEvent(const MouseMoveEvent<MouseScroll>& pos) {
             if (!OnMouseScroll) { return false; }//key not regonized
             auto tmp = [&, pos] {
                 OnMouseScroll(pos);
@@ -42,7 +42,7 @@ namespace SL {
             Ready = true;
             return true;
         }
-        bool InputManager::PushEvent(const MousePositionOffsetEvent& pos) {
+        bool InputManager::PushEvent(const MouseMoveEvent<MousePositionOffset>& pos) {
             if (!OnMousePositionOffset) { return false; }//key not regonized
             auto tmp = [&, pos] {
                 OnMousePositionOffset(pos);
@@ -52,7 +52,7 @@ namespace SL {
             Ready = true;
             return true;
         }
-        bool InputManager::PushEvent(const MousePositionAbsoluteEvent& pos) {
+        bool InputManager::PushEvent(const MouseMoveEvent<MousePositionAbsolute>& pos) {
             if (!OnMousePositionAbsolute) { return false; }//key not regonized
             auto tmp = [&, pos] {
                 OnMousePositionAbsolute(pos);

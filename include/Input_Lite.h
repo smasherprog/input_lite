@@ -8,7 +8,7 @@
 namespace SL {
     namespace Input_Lite {
         //codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
-        enum KeyCodes : unsigned char {
+        enum class KeyCodes : unsigned char {
             KEY_A = 4,
             KEY_B = 5,
             KEY_C = 6,
@@ -131,7 +131,7 @@ namespace SL {
             INVALID = 255
         };
 
-        enum MouseButtons : unsigned char {
+        enum class MouseButtons : unsigned char {
             LEFT,
             MIDDLE,
             RIGHT,
@@ -141,38 +141,33 @@ namespace SL {
         int ConvertToNative(KeyCodes key);
         KeyCodes ConvertToKeyCode(int key);
 
-        int ConvertToNative(MouseButtons mousebutton);
-        MouseButtons ConvertToMouseButton(int mousebutton);
-
         struct KeyEvent {
             bool Pressed;
             KeyCodes Key;
         };
-        struct MouseEvent {
+        struct MouseButtonEvent {
             bool Pressed;
             MouseButtons Button;
         };
-        struct MouseScroll { int Offset; };
-        struct MousePositionOffset { int X = 0; int Y = 0; };
-        struct MousePositionAbsolute { int X = 0; int Y = 0; };
-        template<typename MOVEKIND>struct MouseMoveEvent { MOVEKIND Position; };
+        struct MouseScrollEvent { int Offset; };
+        struct MousePositionOffsetEvent { int X = 0; int Y = 0; };
+        struct MousePositionAbsoluteEvent { int X = 0; int Y = 0; };
 
         void SendInput(const KeyEvent& e);
-        void SendInput(const MouseEvent& e);
-        void SendInput(const MouseMoveEvent<MouseScroll>& e);
-        void SendInput(const MouseMoveEvent<MousePositionOffset>& e);
-        void SendInput(const MouseMoveEvent<MousePositionAbsolute>& e);
+        void SendInput(const MouseButtonEvent& e);
+        void SendInput(const MouseScrollEvent& e);
+        void SendInput(const MousePositionOffsetEvent& e);
+        void SendInput(const MousePositionAbsoluteEvent& e);
 
         class IInputManager
         {
         public:
             virtual ~IInputManager() {}
             virtual bool PushEvent(const KeyEvent& e) = 0;
-            virtual bool PushEvent(const MouseEvent& e) = 0;
-
-            virtual bool PushEvent(const MouseMoveEvent<MouseScroll>& pos) = 0;
-            virtual bool PushEvent(const MouseMoveEvent<MousePositionOffset>& pos) = 0;
-            virtual bool PushEvent(const MouseMoveEvent<MousePositionAbsolute>& pos) = 0;
+            virtual bool PushEvent(const MouseButtonEvent& e) = 0;
+            virtual bool PushEvent(const MouseScrollEvent& pos) = 0;
+            virtual bool PushEvent(const MousePositionOffsetEvent& pos) = 0;
+            virtual bool PushEvent(const MousePositionAbsoluteEvent& pos) = 0;
 
         };
         class IInputConfiguration
@@ -181,10 +176,10 @@ namespace SL {
             virtual ~IInputConfiguration() {}
 
             virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent&)>& cb) = 0;
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseEvent&)>& cb) = 0;
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MouseScroll>&)>& cb) = 0;
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionOffset>&)>& cb) = 0;
-            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseMoveEvent<MousePositionAbsolute>&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseButtonEvent&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseScrollEvent&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionOffsetEvent&)>& cb) = 0;
+            virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionAbsoluteEvent&)>& cb) = 0;
             virtual std::shared_ptr<IInputManager> Build() = 0;
         };
 
