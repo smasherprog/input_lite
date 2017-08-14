@@ -8,7 +8,7 @@
 namespace SL {
     namespace Input_Lite {
         //codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
-        enum class KeyCodes : unsigned char {
+        enum KeyCodes : unsigned char {
             KEY_A = 4,
             KEY_B = 5,
             KEY_C = 6,
@@ -134,8 +134,7 @@ namespace SL {
         enum class MouseButtons : unsigned char {
             LEFT,
             MIDDLE,
-            RIGHT,
-            INVALID=255
+            RIGHT
         };
 
         int ConvertToNative(KeyCodes key);
