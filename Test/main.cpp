@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_RETURN) == SL::Input_Lite::KeyCodes::KEY_Enter);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_ESCAPE) == SL::Input_Lite::KeyCodes::KEY_Escape);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_DELETE) == SL::Input_Lite::KeyCodes::KEY_Delete);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_BACK) == SL::Input_Lite::KeyCodes::KEY_Delete);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_TAB) == SL::Input_Lite::KeyCodes::KEY_Tab);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_SPACE) == SL::Input_Lite::KeyCodes::KEY_Space);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_MINUS) == SL::Input_Lite::KeyCodes::KEY_Minus);
@@ -76,7 +76,35 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_1) == SL::Input_Lite::KeyCodes::KEY_Semicolon);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_7) == SL::Input_Lite::KeyCodes::KEY_Quote);
 
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_3) == SL::Input_Lite::KeyCodes::KEY_Grave);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_COMMA) == SL::Input_Lite::KeyCodes::KEY_Comma);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_PERIOD) == SL::Input_Lite::KeyCodes::KEY_Period);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_2) == SL::Input_Lite::KeyCodes::KEY_Slash);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_CAPITAL) == SL::Input_Lite::KeyCodes::KEY_CapsLock);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F1) == SL::Input_Lite::KeyCodes::KEY_F1);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F2) == SL::Input_Lite::KeyCodes::KEY_F2);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F3) == SL::Input_Lite::KeyCodes::KEY_F3);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F4) == SL::Input_Lite::KeyCodes::KEY_F4);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F5) == SL::Input_Lite::KeyCodes::KEY_F5);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F6) == SL::Input_Lite::KeyCodes::KEY_F6);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F7) == SL::Input_Lite::KeyCodes::KEY_F7);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F8) == SL::Input_Lite::KeyCodes::KEY_F8);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F9) == SL::Input_Lite::KeyCodes::KEY_F9);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F10) == SL::Input_Lite::KeyCodes::KEY_F10);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F11) == SL::Input_Lite::KeyCodes::KEY_F11);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_F12) == SL::Input_Lite::KeyCodes::KEY_F12);
 
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_SNAPSHOT) == SL::Input_Lite::KeyCodes::KEY_PrintScreen);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_SCROLL) == SL::Input_Lite::KeyCodes::KEY_ScrollLock);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_PAUSE) == SL::Input_Lite::KeyCodes::KEY_Pause);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_INSERT) == SL::Input_Lite::KeyCodes::KEY_Insert);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_HOME) == SL::Input_Lite::KeyCodes::KEY_Home);
+
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_PRIOR) == SL::Input_Lite::KeyCodes::KEY_PageUp);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_DELETE) == SL::Input_Lite::KeyCodes::KEY_DeleteForward);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_END) == SL::Input_Lite::KeyCodes::KEY_End);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_NEXT) == SL::Input_Lite::KeyCodes::KEY_PageDown);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_RIGHT) == SL::Input_Lite::KeyCodes::KEY_Right);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_0) == '0');
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_1) == '1');
@@ -118,7 +146,7 @@ int main(int argc, char* argv[])
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Enter) == VK_RETURN);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Escape) == VK_ESCAPE);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Delete) == VK_DELETE);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Delete) == VK_BACK);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Tab) == VK_TAB);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Space) == VK_SPACE);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Minus) == VK_OEM_MINUS);
@@ -130,6 +158,36 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Semicolon) == VK_OEM_1);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Quote) == VK_OEM_7);
 
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Grave) == VK_OEM_3);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Comma) == VK_OEM_COMMA);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Period) == VK_OEM_PERIOD);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Slash) == VK_OEM_2);
+
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_CapsLock) == VK_CAPITAL);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F1) == VK_F1); 
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F2) == VK_F2);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F3) == VK_F3);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F4) == VK_F4);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F5) == VK_F5);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F6) == VK_F6);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F7) == VK_F7);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F8) == VK_F8);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F9) == VK_F9);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F10) == VK_F10);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F11) == VK_F11);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F12) == VK_F12);
+
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PrintScreen) == VK_SNAPSHOT);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_ScrollLock) == VK_SCROLL);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Pause) == VK_PAUSE);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Insert) == VK_INSERT);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Home) == VK_HOME);
+
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PageUp) == VK_PRIOR);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_DeleteForward) == VK_DELETE);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_End) == VK_END);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PageDown) == VK_NEXT);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Right) == VK_RIGHT);
 
 #elif __APPLE__
 

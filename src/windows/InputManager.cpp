@@ -22,7 +22,7 @@ namespace SL {
             return true;
         }
         bool InputManager::PushEvent(const MouseButtonEvent& e) {
-            if (e.Button == MouseButtons::INVALID || !OnMouseButtonEvent) { return false; }//key not regonized
+            if (!OnMouseButtonEvent) { return false; }//key not regonized
             auto tmp = [&, e] {
                 OnMouseButtonEvent(e);
             };
