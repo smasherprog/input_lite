@@ -1,9 +1,9 @@
 ﻿#include "Input_Lite.h"
+#include <assert.h>
 #include <chrono>
 #include <iostream>
 #include <string>
 #include <thread>
-#include <assert.h>
 
 using namespace std::chrono_literals;
 
@@ -18,12 +18,11 @@ using namespace std::chrono_literals;
 #error "Unknown Operating System!"
 #endif
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     std::this_thread::sleep_for(4s);
 
 #ifdef WIN32
-    //windows ascii codes are the char representations 
+    // windows ascii codes are the char representations
     assert(SL::Input_Lite::ConvertToKeyCode('0') == SL::Input_Lite::KeyCodes::KEY_0);
     assert(SL::Input_Lite::ConvertToKeyCode('1') == SL::Input_Lite::KeyCodes::KEY_1);
     assert(SL::Input_Lite::ConvertToKeyCode('2') == SL::Input_Lite::KeyCodes::KEY_2);
@@ -64,11 +63,11 @@ int main(int argc, char* argv[])
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_RETURN) == SL::Input_Lite::KeyCodes::KEY_Enter);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_ESCAPE) == SL::Input_Lite::KeyCodes::KEY_Escape);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_BACK) == SL::Input_Lite::KeyCodes::KEY_Delete);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_BACK) == SL::Input_Lite::KeyCodes::KEY_Backspace);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_TAB) == SL::Input_Lite::KeyCodes::KEY_Tab);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_SPACE) == SL::Input_Lite::KeyCodes::KEY_Space);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_MINUS) == SL::Input_Lite::KeyCodes::KEY_Minus);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_PLUS) == SL::Input_Lite::KeyCodes::KEY_Equals);//this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_PLUS) == SL::Input_Lite::KeyCodes::KEY_Equals); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_4) == SL::Input_Lite::KeyCodes::KEY_LeftBracket);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_6) == SL::Input_Lite::KeyCodes::KEY_RightBracket);
@@ -95,13 +94,13 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(VK_F12) == SL::Input_Lite::KeyCodes::KEY_F12);
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_SNAPSHOT) == SL::Input_Lite::KeyCodes::KEY_PrintScreen);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_SCROLL) == SL::Input_Lite::KeyCodes::KEY_ScrollLock);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_SCROLL) == SL::Input_Lite::KeyCodes::KEY_ScrollLk);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_PAUSE) == SL::Input_Lite::KeyCodes::KEY_Pause);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_INSERT) == SL::Input_Lite::KeyCodes::KEY_Insert);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_HOME) == SL::Input_Lite::KeyCodes::KEY_Home);
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_PRIOR) == SL::Input_Lite::KeyCodes::KEY_PageUp);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_DELETE) == SL::Input_Lite::KeyCodes::KEY_DeleteForward);
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_DELETE) == SL::Input_Lite::KeyCodes::KEY_Delete);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_END) == SL::Input_Lite::KeyCodes::KEY_End);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NEXT) == SL::Input_Lite::KeyCodes::KEY_PageDown);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_RIGHT) == SL::Input_Lite::KeyCodes::KEY_Right);
@@ -115,7 +114,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(VK_MULTIPLY) == SL::Input_Lite::KeyCodes::KP_Multiply);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_SUBTRACT) == SL::Input_Lite::KeyCodes::KP_Subtract);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_ADD) == SL::Input_Lite::KeyCodes::KP_Add);
-    //assert(SL::Input_Lite::ConvertToKeyCode(VK_RETURN) == SL::Input_Lite::KeyCodes::KP_Enter);
+    // assert(SL::Input_Lite::ConvertToKeyCode(VK_RETURN) == SL::Input_Lite::KeyCodes::KP_Enter);
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMPAD1) == SL::Input_Lite::KeyCodes::KP_1);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMPAD2) == SL::Input_Lite::KeyCodes::KP_2);
@@ -127,10 +126,10 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMPAD8) == SL::Input_Lite::KeyCodes::KP_8);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMPAD9) == SL::Input_Lite::KeyCodes::KP_9);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMPAD0) == SL::Input_Lite::KeyCodes::KP_0);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_DECIMAL) == SL::Input_Lite::KeyCodes::KP_Point); 
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_DECIMAL) == SL::Input_Lite::KeyCodes::KP_Point);
 
-    //assert(SL::Input_Lite::ConvertToKeyCode(255) == SL::Input_Lite::KeyCodes::KEY_NonUSBackslash);
-    //assert(SL::Input_Lite::ConvertToKeyCode(255) == SL::Input_Lite::KeyCodes::KP_Equals);
+    // assert(SL::Input_Lite::ConvertToKeyCode(255) == SL::Input_Lite::KeyCodes::KEY_NonUSBackslash);
+    // assert(SL::Input_Lite::ConvertToKeyCode(255) == SL::Input_Lite::KeyCodes::KP_Equals);
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_F13) == SL::Input_Lite::KeyCodes::KEY_F13);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_F14) == SL::Input_Lite::KeyCodes::KEY_F14);
@@ -185,11 +184,11 @@ int main(int argc, char* argv[])
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Enter) == VK_RETURN);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Escape) == VK_ESCAPE);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Delete) == VK_BACK);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Backspace) == VK_BACK);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Tab) == VK_TAB);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Space) == VK_SPACE);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Minus) == VK_OEM_MINUS);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) == VK_OEM_PLUS);//this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) == VK_OEM_PLUS); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_LeftBracket) == VK_OEM_4);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_RightBracket) == VK_OEM_6);
@@ -203,7 +202,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Slash) == VK_OEM_2);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_CapsLock) == VK_CAPITAL);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F1) == VK_F1); 
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F1) == VK_F1);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F2) == VK_F2);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F3) == VK_F3);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F4) == VK_F4);
@@ -217,13 +216,13 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F12) == VK_F12);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PrintScreen) == VK_SNAPSHOT);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_ScrollLock) == VK_SCROLL);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_ScrollLk) == VK_SCROLL);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Pause) == VK_PAUSE);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Insert) == VK_INSERT);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Home) == VK_HOME);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PageUp) == VK_PRIOR);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_DeleteForward) == VK_DELETE);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Delete) == VK_DELETE);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_End) == VK_END);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_PageDown) == VK_NEXT);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Right) == VK_RIGHT);
@@ -275,41 +274,41 @@ int main(int argc, char* argv[])
 #error "Unknown Operating System!"
 #endif
 
-return 0;
+    return 0;
     std::cout << "Starting Mouse move tests by Offset" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ 100, 100 });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{100, 100});
     for (auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{ 1, 0 });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{1, 0});
         std::this_thread::sleep_for(10ms);
     }
     for (auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{ 0, 1 });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{0, 1});
         std::this_thread::sleep_for(10ms);
     }
     std::cout << "Starting Mouse move tests by Absolute" << std::endl;
     for (auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ x, 300 });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{x, 300});
         std::this_thread::sleep_for(10ms);
     }
     for (auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ 500, y });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{500, y});
         std::this_thread::sleep_for(10ms);
     }
     std::cout << "Starting Mouse Click tests right down up" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ true, SL::Input_Lite::MouseButtons::RIGHT });
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ false, SL::Input_Lite::MouseButtons::RIGHT });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{true, SL::Input_Lite::MouseButtons::RIGHT});
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{false, SL::Input_Lite::MouseButtons::RIGHT});
 
     std::cout << "Starting Mouse Click tests left down up" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ true, SL::Input_Lite::MouseButtons::LEFT });
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ false, SL::Input_Lite::MouseButtons::LEFT });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{true, SL::Input_Lite::MouseButtons::LEFT});
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{false, SL::Input_Lite::MouseButtons::LEFT});
 
     std::cout << "Starting Mouse wheel tests " << std::endl;
     for (auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{ 1 });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{1});
         std::this_thread::sleep_for(10ms);
     }
     for (auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{ -1 });
+        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{-1});
         std::this_thread::sleep_for(10ms);
     }
     return 0;
