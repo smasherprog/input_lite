@@ -18,7 +18,8 @@ using namespace std::chrono_literals;
 #error "Unknown Operating System!"
 #endif
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     std::this_thread::sleep_for(4s);
 
 #ifdef WIN32
