@@ -8,7 +8,7 @@
 namespace SL {
 namespace Input_Lite {
     // codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
-    enum KeyCodes : unsigned char {
+    enum KeyCodes {
         KEY_A = 4,
         KEY_B = 5,
         KEY_C = 6,
@@ -75,7 +75,7 @@ namespace Input_Lite {
         KEY_F11 = 68,
         KEY_F12 = 69,
         KEY_PrintScreen = 70,
-        KEY_ScrollLk = 71,
+        KEY_ScrollLock = 71,
         KEY_Pause = 72,
         KEY_Insert = 73,
         KEY_Home = 74,
@@ -123,11 +123,11 @@ namespace Input_Lite {
         KEY_LeftControl = 224,
         KEY_LeftShift = 225,
         KEY_LeftAlt = 226,
-        KEY_LeftGUI = 227,
+        KEY_LeftMeta = 227,
         KEY_RightControl = 228,
         KEY_RightShift = 229,
         KEY_RightAlt = 230,
-        KEY_RightGUI = 231,
+        KEY_RightMeta = 231,
         INVALID = 255
     };
 

@@ -5,4 +5,4 @@ TabWidth: 8
 UseTab: Never
 BreakBeforeBraces: Stroustrup
 NamespaceIndentation: Inner
-ColumnLimit: 150
+ColumnLimit: 150 
