@@ -301,7 +301,6 @@ int main(int argc, char *argv[])
 #error "Unknown Operating System!"
 #endif
 
-    return 0;
     std::cout << "Starting Mouse move tests by Offset" << std::endl;
     SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{100, 100});
     for (auto x = 0; x < 500; x++) {
@@ -338,5 +337,6 @@ int main(int argc, char *argv[])
         SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{-1});
         std::this_thread::sleep_for(10ms);
     }
+
     return 0;
 }
