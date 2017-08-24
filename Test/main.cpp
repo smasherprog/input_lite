@@ -12,11 +12,7 @@ using namespace std::chrono_literals;
 #include <windows.h>
 #elif __APPLE__
 
-#elif __linux__
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/extensions/XInput.h>
-#include <X11/extensions/XTest.h>
+#elif __linux__ 
 #include <X11/keysym.h>
 #else
 #error "Unknown Operating System!"
