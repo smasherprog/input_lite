@@ -10,302 +10,238 @@ namespace SL
 {
 namespace Input_Lite
 {
-
-    void SendKey_Impl(char key, int pressed, Display* display)
-    {
-        if((key >= '0' && key <= '9') || (key >= 'a' && key <= 'z')) {
-            char bufkey[2];
-            bufkey[0] = key;
-            bufkey[1] = 0;
-            auto ky = XStringToKeysym(bufkey);
-            auto k = XKeysymToKeycode(display, ky);
-            XTestFakeKeyEvent(display, k, pressed, CurrentTime);
-
-        } else {
-        }
-    }
-    void SendKey_Impl(wchar_t key, int pressed, Display* display)
-    {
-        return;
-        if(key < 128) {
-            SendKey_Impl(static_cast<char>(key), pressed, display);
-        } else {
-            auto k = XKeysymToKeycode(display, key);
-            XTestFakeKeyEvent(display, k, pressed, CurrentTime);
-        }
-    }
-    void SendKeyUp(char key)
+    void SendInput(const KeyEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        SendKey_Impl(key, False, display);
+        XTestFakeKeyEvent(display, ConvertToNative(e.Key), e.Pressed ? True : False, CurrentTime);
         XCloseDisplay(display);
     }
-    void SendKeyUp(wchar_t key)
+    void SendInput(const MouseButtonEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        SendKey_Impl(key, False, display);
-        XCloseDisplay(display);
-    }
-    void SendKeyDown(wchar_t key)
-    {
-        auto display = XOpenDisplay(NULL);
-        SendKey_Impl(key, True, display);
-        XCloseDisplay(display);
-    }
-    void SendKeyDown(char key)
-    {
-        auto display = XOpenDisplay(NULL);
-        SendKey_Impl(key, True, display);
-        XCloseDisplay(display);
-    }
-    void SendKey_Impl(SpecialKeyCodes key, Bool pressed)
-    {
-        KeySym k;
-        switch(key) {
-        case SpecialKeyCodes::BACKSPACE:
-            k = XK_BackSpace;
+        switch(e.Button) {
+        case MouseButtons::LEFT:
+            XTestFakeButtonEvent(display, Button1, e.Pressed ? True : False, CurrentTime);
             break;
-        case SpecialKeyCodes::TAB:
-            k = XK_Tab;
+        case MouseButtons::MIDDLE:
+            XTestFakeButtonEvent(display, Button2, e.Pressed ? True : False, CurrentTime);
             break;
-        case SpecialKeyCodes::ENTER:
-            k = XK_Return;
-            break;
-        case SpecialKeyCodes::SHIFTLEFT:
-            k = XK_Shift_L;
-            break;
-        case SpecialKeyCodes::CONTROLLEFT:
-            k = XK_Control_L;
-            break;
-        case SpecialKeyCodes::ALTLEFT:
-            k = XK_Alt_L;
-            break;
-        case SpecialKeyCodes::CAPSLOCK:
-            k = XK_Caps_Lock;
-            break;
-        case SpecialKeyCodes::ESCAPE:
-            k = XK_Escape;
-            break;
-        case SpecialKeyCodes::SPACE:
-            k = XK_KP_Space;
-            break;
-        case SpecialKeyCodes::PAGEUP:
-            k = XK_KP_Page_Up;
-            break;
-        case SpecialKeyCodes::PAGEDOWN:
-            k = XK_KP_Page_Down;
-            break;
-        case SpecialKeyCodes::END:
-            k = XK_KP_End;
-            break;
-        case SpecialKeyCodes::HOME:
-            k = XK_KP_Home;
-            break;
-        case SpecialKeyCodes::ARROWLEFT:
-            k = XK_Left;
-            break;
-        case SpecialKeyCodes::ARROWUP:
-            k = XK_Up;
-            break;
-        case SpecialKeyCodes::ARROWRIGHT:
-            k = XK_Right;
-            break;
-        case SpecialKeyCodes::ARROWDOWN:
-            k = XK_Down;
-            break;
-
-        case SpecialKeyCodes::INSERT:
-            k = XK_Insert;
-            break;
-        case SpecialKeyCodes::DELETE:
-            k = XK_Delete;
-            break;
-        case SpecialKeyCodes::PRINTSCREEN:
-            k = XK_Print;
-            break;
-        case SpecialKeyCodes::SCROLLLOCK:
-            k = XK_Scroll_Lock;
-            break;
-        case SpecialKeyCodes::PAUSE:
-            k = XK_Pause;
-            break;
-        case SpecialKeyCodes::OSLEFT:
-            k = XK_Meta_L;
-            break;
-        case SpecialKeyCodes::F1:
-            k = XK_F1;
-            break;
-        case SpecialKeyCodes::F2:
-            k = XK_F2;
-            break;
-        case SpecialKeyCodes::F3:
-            k = XK_F3;
-            break;
-        case SpecialKeyCodes::F4:
-            k = XK_F4;
-            break;
-        case SpecialKeyCodes::F5:
-            k = XK_F5;
-            break;
-        case SpecialKeyCodes::F6:
-            k = XK_F6;
-            break;
-        case SpecialKeyCodes::F7:
-            k = XK_F7;
-            break;
-        case SpecialKeyCodes::F8:
-            k = XK_F8;
-            break;
-        case SpecialKeyCodes::F9:
-            k = XK_F9;
-            break;
-        case SpecialKeyCodes::F10:
-            k = XK_F10;
-            break;
-        case SpecialKeyCodes::F11:
-            k = XK_F11;
-            break;
-        case SpecialKeyCodes::F12:
-            k = XK_F12;
-            break;
-        case SpecialKeyCodes::F13:
-            k = XK_F13;
-            break;
-        case SpecialKeyCodes::F14:
-            k = XK_F14;
-            break;
-        case SpecialKeyCodes::F15:
-            k = XK_F15;
-            break;
-        case SpecialKeyCodes::F16:
-            k = XK_F16;
-            break;
-        case SpecialKeyCodes::F17:
-            k = XK_F17;
-            break;
-        case SpecialKeyCodes::F18:
-            k = XK_F18;
-            break;
-
-        case SpecialKeyCodes::NUMLOCK:
-            k = XK_Num_Lock;
-            break;
-        case SpecialKeyCodes::NUMPAD0:
-            k = XK_KP_0;
-            break;
-        case SpecialKeyCodes::NUMPAD1:
-            k = XK_KP_1;
-            break;
-        case SpecialKeyCodes::NUMPAD2:
-            k = XK_KP_2;
-            break;
-        case SpecialKeyCodes::NUMPAD3:
-            k = XK_KP_3;
-            break;
-        case SpecialKeyCodes::NUMPAD4:
-            k = XK_KP_4;
-            break;
-        case SpecialKeyCodes::NUMPAD5:
-            k = XK_KP_5;
-            break;
-        case SpecialKeyCodes::NUMPAD6:
-            k = XK_KP_6;
-            break;
-        case SpecialKeyCodes::NUMPAD7:
-            k = XK_KP_7;
-            break;
-        case SpecialKeyCodes::NUMPAD8:
-            k = XK_KP_8;
-            break;
-        case SpecialKeyCodes::NUMPAD9:
-            k = XK_KP_9;
-            break;
-
-        case SpecialKeyCodes::NUMPADADD:
-            k = XK_KP_Add;
-            break;
-        case SpecialKeyCodes::NUMPADDECIMAL:
-            k = XK_KP_Decimal;
-            break;
-        case SpecialKeyCodes::NUMPADDIVIDE:
-            k = XK_KP_Divide;
-            break;
-        case SpecialKeyCodes::NUMPADMULTIPLY:
-            k = XK_KP_Multiply;
-            break;
-        case SpecialKeyCodes::NUMPADSUBTRACT:
-            k = XK_KP_Separator;
+        case MouseButtons::RIGHT:
+            XTestFakeButtonEvent(display, Button3, e.Pressed ? True : False, CurrentTime);
             break;
         default:
-            return;
+            break;
         }
-        auto display = XOpenDisplay(NULL); 
-        auto keyp = XKeysymToKeycode (display, k);
-        XTestFakeKeyEvent(display,keyp , pressed, CurrentTime);
         XCloseDisplay(display);
     }
-    void SendKeyUp(SpecialKeyCodes key)
-    {
-        SendKey_Impl(key, False);
-    }
-    void SendKeyDown(SpecialKeyCodes key)
-    {
-        SendKey_Impl(key, True);
-    }
-
-    void SendMouseScroll(int offset)
+    void SendInput(const MouseScrollEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        if(offset < 0) {
-            for(auto i = 0; i < abs(offset) && i < 5; i++) { /// cap at 5
+        if(e.Offset < 0) {
+            for(auto i = 0; i < abs(e.Offset) && i < 5; i++) { /// cap at 5
                 XTestFakeButtonEvent(display, Button5, True, CurrentTime);
                 XTestFakeButtonEvent(display, Button5, False, CurrentTime);
             }
-        } else if(offset > 0) {
-            for(auto i = 0; i < offset && i < 5; i++) { /// cap at 5
+        } else if(e.Offset > 0) {
+            for(auto i = 0; i < e.Offset && i < 5; i++) { /// cap at 5
                 XTestFakeButtonEvent(display, Button4, True, CurrentTime);
                 XTestFakeButtonEvent(display, Button4, False, CurrentTime);
             }
         }
         XCloseDisplay(display);
     }
-    void SendMousePosition(const Offset& offset)
+    void SendInput(const MousePositionOffsetEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        XTestFakeRelativeMotionEvent(display, -1, offset.X, offset.Y);
+        XTestFakeRelativeMotionEvent(display, -1, e.X, e.Y);
         XCloseDisplay(display);
     }
-    void SendMousePosition(const AbsolutePos& a)
+    void SendInput(const MousePositionAbsoluteEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        XTestFakeMotionEvent(display, -1, a.X, a.Y, CurrentTime);
+        XTestFakeMotionEvent(display, -1, e.X, e.Y, CurrentTime);
         XCloseDisplay(display);
     }
-    void SendMouse_Impl(const MouseButtons button, Bool pressed)
+    int ConvertToNative(KeyCodes key)
     {
-        auto display = XOpenDisplay(NULL);
-        switch(button) {
-        case MouseButtons::LEFT:
-            XTestFakeButtonEvent(display, Button1, pressed, CurrentTime);
-            break;
-        case MouseButtons::MIDDLE:
-            XTestFakeButtonEvent(display, Button2, pressed, CurrentTime);
-            break;
-        case MouseButtons::RIGHT:
-            XTestFakeButtonEvent(display, Button3, pressed, CurrentTime);
-            break;
+        KeySym k;
+        switch(key) {
+
+        case KeyCodes::KEY_A:
+        case KeyCodes::KEY_B:
+        case KeyCodes::KEY_C:
+        case KeyCodes::KEY_D:
+        case KeyCodes::KEY_E:
+        case KeyCodes::KEY_F:
+        case KeyCodes::KEY_G:
+        case KeyCodes::KEY_H:
+        case KeyCodes::KEY_I:
+        case KeyCodes::KEY_J:
+        case KeyCodes::KEY_K:
+        case KeyCodes::KEY_L:
+        case KeyCodes::KEY_M:
+        case KeyCodes::KEY_N:
+        case KeyCodes::KEY_O:
+        case KeyCodes::KEY_P:
+        case KeyCodes::KEY_Q:
+        case KeyCodes::KEY_R:
+        case KeyCodes::KEY_S:
+        case KeyCodes::KEY_T:
+        case KeyCodes::KEY_U:
+        case KeyCodes::KEY_V:
+        case KeyCodes::KEY_W:
+        case KeyCodes::KEY_X:
+        case KeyCodes::KEY_Y:
+        case KeyCodes::KEY_Z:
+            return static_cast<int>('A') + (key - KeyCodes::KEY_A);
+        case KeyCodes::KEY_1:
+        case KeyCodes::KEY_2:
+        case KeyCodes::KEY_3:
+        case KeyCodes::KEY_4:
+        case KeyCodes::KEY_5:
+        case KeyCodes::KEY_6:
+        case KeyCodes::KEY_7:
+        case KeyCodes::KEY_8:
+        case KeyCodes::KEY_9:
+            return static_cast<int>('1') + (key - KeyCodes::KEY_1);
+        case KeyCodes::KEY_0:
+            return static_cast<int>('0');
+        case KeyCodes::KEY_Enter:
+            return XK_Return;
+        case KeyCodes::KEY_Escape:
+            return XK_Escape;
+        case KeyCodes::KEY_Backspace:
+            return XK_BackSpace;
+        case KeyCodes::KEY_Tab:
+            return XK_Tab;
+        case KeyCodes::KEY_Space:
+            return XK_KP_Space;
+        case KeyCodes::KEY_Minus:
+            return XK_minus;
+        case KeyCodes::KEY_Equals:
+            return XK_equal; // this is correct and not a mistype
+        case KeyCodes::KEY_LeftBracket:
+            return XK_bracketleft;
+        case KeyCodes::KEY_RightBracket:
+            return XK_bracketright;
+        case KeyCodes::KEY_Backslash:
+            return XK_backslash;
+        case KeyCodes::KEY_Semicolon:
+            return XK_semicolon;
+        case KeyCodes::KEY_Quote:
+            return XK_quotedbl;
+        case KeyCodes::KEY_Grave:
+            return XK_grave;
+        case KeyCodes::KEY_Comma:
+            return XK_comma;
+        case KeyCodes::KEY_Period:
+            return XK_period;
+        case KeyCodes::KEY_Slash:
+            return XK_slash;
+        case KeyCodes::KEY_CapsLock:
+            return XK_Caps_Lock;
+        case KeyCodes::KEY_F1:
+        case KeyCodes::KEY_F2:
+        case KeyCodes::KEY_F3:
+        case KeyCodes::KEY_F4:
+        case KeyCodes::KEY_F5:
+        case KeyCodes::KEY_F6:
+        case KeyCodes::KEY_F7:
+        case KeyCodes::KEY_F8:
+        case KeyCodes::KEY_F9:
+        case KeyCodes::KEY_F10:
+        case KeyCodes::KEY_F11:
+        case KeyCodes::KEY_F12:
+            return XK_F1 + (key - KeyCodes::KEY_F1);
+        case KeyCodes::KEY_F13:
+        case KeyCodes::KEY_F14:
+        case KeyCodes::KEY_F15:
+        case KeyCodes::KEY_F16:
+        case KeyCodes::KEY_F17:
+        case KeyCodes::KEY_F18:
+        case KeyCodes::KEY_F19:
+        case KeyCodes::KEY_F20:
+        case KeyCodes::KEY_F21:
+        case KeyCodes::KEY_F22:
+        case KeyCodes::KEY_F23:
+        case KeyCodes::KEY_F24:
+            return XK_F13 + (key - KeyCodes::KEY_F13);
+        case KeyCodes::KEY_PrintScreen:
+            return XK_Print;
+        case KeyCodes::KEY_ScrollLock:
+            return XK_Scroll_Lock;
+        case KeyCodes::KEY_Pause:
+            return XK_Pause;
+        case KeyCodes::KEY_Insert:
+            return XK_Insert;
+        case KeyCodes::KEY_Home:
+            return XK_Home;
+        case KeyCodes::KEY_PageUp:
+            return XK_Page_Up;
+        case KeyCodes::KEY_Delete:
+            return XK_Delete;
+        case KeyCodes::KEY_End:
+            return XK_End;
+        case KeyCodes::KEY_PageDown:
+            return XK_Page_Down;
+        case KeyCodes::KEY_Right:
+            return XK_Right;
+        case KeyCodes::KEY_Left:
+            return XK_Left;
+        case KeyCodes::KEY_Down:
+            return XK_Down;
+        case KeyCodes::KEY_Up:
+            return XK_Up;
+        case KeyCodes::KP_NumLock:
+            return XK_Num_Lock;
+        case KeyCodes::KP_Divide:
+            return XK_KP_Divide;
+        case KeyCodes::KP_Multiply:
+            return XK_KP_Multiply;
+        case KeyCodes::KP_Subtract:
+            return XK_KP_Subtract;
+        case KeyCodes::KP_Add:
+            return XK_KP_Add;
+        case KeyCodes::KP_Enter:
+            return XK_KP_Enter;
+        case KeyCodes::KP_1:
+        case KeyCodes::KP_2:
+        case KeyCodes::KP_3:
+        case KeyCodes::KP_4:
+        case KeyCodes::KP_5:
+        case KeyCodes::KP_6:
+        case KeyCodes::KP_7:
+        case KeyCodes::KP_8:
+        case KeyCodes::KP_9:
+            return XK_KP_1 + (key - KeyCodes::KP_1);
+        case KeyCodes::KP_0:
+            return XK_KP_0;
+        case KeyCodes::KP_Point:
+            return XK_KP_Decimal;
+        case KeyCodes::KEY_Help:
+            return XK_Help;
+        case KeyCodes::KEY_Menu:
+            return XK_Menu;
+        case KeyCodes::KEY_LeftControl:
+            return XK_Control_L;
+        case KeyCodes::KEY_LeftShift:
+            return XK_Shift_L;
+        case KeyCodes::KEY_LeftAlt:
+            return XK_Alt_L;
+        case KeyCodes::KEY_LeftMeta:
+            return XK_Meta_L;
+
+        case KeyCodes::KEY_RightControl:
+            return XK_Control_R;
+        case KeyCodes::KEY_RightShift:
+            return XK_Shift_R;
+        case KeyCodes::KEY_RightAlt:
+            return XK_Alt_R;
+        case KeyCodes::KEY_RightMeta:
+            return XK_Meta_R;
         default:
-            break;
+            return 255;
         }
-        XCloseDisplay(display);
-    }
-    void SendMouseUp(const MouseButtons button)
-    {
-        SendMouse_Impl(button, False);
-    }
-    void SendMouseDown(const MouseButtons button)
-    {
-        SendMouse_Impl(button, True);
     }
 }
 }
