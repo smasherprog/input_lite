@@ -13,7 +13,10 @@ namespace Input_Lite
     void SendInput(const KeyEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        XTestFakeKeyEvent(display, ConvertToNative(e.Key), e.Pressed ? True : False, CurrentTime);
+        auto mappedkey = ConvertToNative(e.Key);
+        if(mappedkey ==255) return;//key doesnt exist
+        auto k = XKeysymToKeycode(display, mappedkey);
+        XTestFakeKeyEvent(display, k, e.Pressed ? True : False, CurrentTime);
         XCloseDisplay(display);
     }
     void SendInput(const MouseButtonEvent& e)
