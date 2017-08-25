@@ -66,176 +66,176 @@ namespace Input_Lite {
     int ConvertToNative(KeyCodes key)
     {
         switch (key) {
-        case SL::Input_Lite::KEY_A:
-        case SL::Input_Lite::KEY_B:
-        case SL::Input_Lite::KEY_C:
-        case SL::Input_Lite::KEY_D:
-        case SL::Input_Lite::KEY_E:
-        case SL::Input_Lite::KEY_F:
-        case SL::Input_Lite::KEY_G:
-        case SL::Input_Lite::KEY_H:
-        case SL::Input_Lite::KEY_I:
-        case SL::Input_Lite::KEY_J:
-        case SL::Input_Lite::KEY_K:
-        case SL::Input_Lite::KEY_L:
-        case SL::Input_Lite::KEY_M:
-        case SL::Input_Lite::KEY_N:
-        case SL::Input_Lite::KEY_O:
-        case SL::Input_Lite::KEY_P:
-        case SL::Input_Lite::KEY_Q:
-        case SL::Input_Lite::KEY_R:
-        case SL::Input_Lite::KEY_S:
-        case SL::Input_Lite::KEY_T:
-        case SL::Input_Lite::KEY_U:
-        case SL::Input_Lite::KEY_V:
-        case SL::Input_Lite::KEY_W:
-        case SL::Input_Lite::KEY_X:
-        case SL::Input_Lite::KEY_Y:
-        case SL::Input_Lite::KEY_Z:
-            return static_cast<int>('A') + (key - SL::Input_Lite::KEY_A);
-        case SL::Input_Lite::KEY_1:
-        case SL::Input_Lite::KEY_2:
-        case SL::Input_Lite::KEY_3:
-        case SL::Input_Lite::KEY_4:
-        case SL::Input_Lite::KEY_5:
-        case SL::Input_Lite::KEY_6:
-        case SL::Input_Lite::KEY_7:
-        case SL::Input_Lite::KEY_8:
-        case SL::Input_Lite::KEY_9:
-            return static_cast<int>('1') + (key - SL::Input_Lite::KEY_1);
-        case SL::Input_Lite::KEY_0:
+        case KeyCodes::KEY_A:
+        case KeyCodes::KEY_B:
+        case KeyCodes::KEY_C:
+        case KeyCodes::KEY_D:
+        case KeyCodes::KEY_E:
+        case KeyCodes::KEY_F:
+        case KeyCodes::KEY_G:
+        case KeyCodes::KEY_H:
+        case KeyCodes::KEY_I:
+        case KeyCodes::KEY_J:
+        case KeyCodes::KEY_K:
+        case KeyCodes::KEY_L:
+        case KeyCodes::KEY_M:
+        case KeyCodes::KEY_N:
+        case KeyCodes::KEY_O:
+        case KeyCodes::KEY_P:
+        case KeyCodes::KEY_Q:
+        case KeyCodes::KEY_R:
+        case KeyCodes::KEY_S:
+        case KeyCodes::KEY_T:
+        case KeyCodes::KEY_U:
+        case KeyCodes::KEY_V:
+        case KeyCodes::KEY_W:
+        case KeyCodes::KEY_X:
+        case KeyCodes::KEY_Y:
+        case KeyCodes::KEY_Z:
+            return static_cast<int>('A') + (key - KeyCodes::KEY_A);
+        case KeyCodes::KEY_1:
+        case KeyCodes::KEY_2:
+        case KeyCodes::KEY_3:
+        case KeyCodes::KEY_4:
+        case KeyCodes::KEY_5:
+        case KeyCodes::KEY_6:
+        case KeyCodes::KEY_7:
+        case KeyCodes::KEY_8:
+        case KeyCodes::KEY_9:
+            return static_cast<int>('1') + (key - KeyCodes::KEY_1);
+        case KeyCodes::KEY_0:
             return static_cast<int>('0');
-        case SL::Input_Lite::KEY_Enter:
+        case KeyCodes::KEY_Enter:
             return VK_RETURN;
-        case SL::Input_Lite::KEY_Escape:
+        case KeyCodes::KEY_Escape:
             return VK_ESCAPE;
-        case SL::Input_Lite::KEY_Backspace:
+        case KeyCodes::KEY_Backspace:
             return VK_BACK;
-        case SL::Input_Lite::KEY_Tab:
+        case KeyCodes::KEY_Tab:
             return VK_TAB;
-        case SL::Input_Lite::KEY_Space:
+        case KeyCodes::KEY_Space:
             return VK_SPACE;
-        case SL::Input_Lite::KEY_Minus:
+        case KeyCodes::KEY_Minus:
             return VK_OEM_MINUS;
-        case SL::Input_Lite::KEY_Equals:
+        case KeyCodes::KEY_Equals:
             return VK_OEM_PLUS; // this is correct and not a mistype
-        case SL::Input_Lite::KEY_LeftBracket:
+        case KeyCodes::KEY_LeftBracket:
             return VK_OEM_4;
-        case SL::Input_Lite::KEY_RightBracket:
+        case KeyCodes::KEY_RightBracket:
             return VK_OEM_6;
-        case SL::Input_Lite::KEY_Backslash:
+        case KeyCodes::KEY_Backslash:
             return VK_OEM_5;
-        case SL::Input_Lite::KEY_Semicolon:
+        case KeyCodes::KEY_Semicolon:
             return VK_OEM_1;
-        case SL::Input_Lite::KEY_Quote:
+        case KeyCodes::KEY_Quote:
             return VK_OEM_7;
-        case SL::Input_Lite::KEY_Grave:
+        case KeyCodes::KEY_Grave:
             return VK_OEM_3;
-        case SL::Input_Lite::KEY_Comma:
+        case KeyCodes::KEY_Comma:
             return VK_OEM_COMMA;
-        case SL::Input_Lite::KEY_Period:
+        case KeyCodes::KEY_Period:
             return VK_OEM_PERIOD;
-        case SL::Input_Lite::KEY_Slash:
+        case KeyCodes::KEY_Slash:
             return VK_OEM_2;
-        case SL::Input_Lite::KEY_CapsLock:
+        case KeyCodes::KEY_CapsLock:
             return VK_CAPITAL;
-        case SL::Input_Lite::KEY_F1:
-        case SL::Input_Lite::KEY_F2:
-        case SL::Input_Lite::KEY_F3:
-        case SL::Input_Lite::KEY_F4:
-        case SL::Input_Lite::KEY_F5:
-        case SL::Input_Lite::KEY_F6:
-        case SL::Input_Lite::KEY_F7:
-        case SL::Input_Lite::KEY_F8:
-        case SL::Input_Lite::KEY_F9:
-        case SL::Input_Lite::KEY_F10:
-        case SL::Input_Lite::KEY_F11:
-        case SL::Input_Lite::KEY_F12:
-            return VK_F1 + (key - SL::Input_Lite::KEY_F1);
-        case SL::Input_Lite::KEY_F13:
-        case SL::Input_Lite::KEY_F14:
-        case SL::Input_Lite::KEY_F15:
-        case SL::Input_Lite::KEY_F16:
-        case SL::Input_Lite::KEY_F17:
-        case SL::Input_Lite::KEY_F18:
-        case SL::Input_Lite::KEY_F19:
-        case SL::Input_Lite::KEY_F20:
-        case SL::Input_Lite::KEY_F21:
-        case SL::Input_Lite::KEY_F22:
-        case SL::Input_Lite::KEY_F23:
-        case SL::Input_Lite::KEY_F24:
-            return VK_F13 + (key - SL::Input_Lite::KEY_F13);
-        case SL::Input_Lite::KEY_PrintScreen:
+        case KeyCodes::KEY_F1:
+        case KeyCodes::KEY_F2:
+        case KeyCodes::KEY_F3:
+        case KeyCodes::KEY_F4:
+        case KeyCodes::KEY_F5:
+        case KeyCodes::KEY_F6:
+        case KeyCodes::KEY_F7:
+        case KeyCodes::KEY_F8:
+        case KeyCodes::KEY_F9:
+        case KeyCodes::KEY_F10:
+        case KeyCodes::KEY_F11:
+        case KeyCodes::KEY_F12:
+            return VK_F1 + (key - KeyCodes::KEY_F1);
+        case KeyCodes::KEY_F13:
+        case KeyCodes::KEY_F14:
+        case KeyCodes::KEY_F15:
+        case KeyCodes::KEY_F16:
+        case KeyCodes::KEY_F17:
+        case KeyCodes::KEY_F18:
+        case KeyCodes::KEY_F19:
+        case KeyCodes::KEY_F20:
+        case KeyCodes::KEY_F21:
+        case KeyCodes::KEY_F22:
+        case KeyCodes::KEY_F23:
+        case KeyCodes::KEY_F24:
+            return VK_F13 + (key - KeyCodes::KEY_F13);
+        case KeyCodes::KEY_PrintScreen:
             return VK_SNAPSHOT;
-        case SL::Input_Lite::KEY_ScrollLock:
+        case KeyCodes::KEY_ScrollLock:
             return VK_SCROLL;
-        case SL::Input_Lite::KEY_Pause:
+        case KeyCodes::KEY_Pause:
             return VK_PAUSE;
-        case SL::Input_Lite::KEY_Insert:
+        case KeyCodes::KEY_Insert:
             return VK_INSERT;
-        case SL::Input_Lite::KEY_Home:
+        case KeyCodes::KEY_Home:
             return VK_HOME;
-        case SL::Input_Lite::KEY_PageUp:
+        case KeyCodes::KEY_PageUp:
             return VK_PRIOR;
-        case SL::Input_Lite::KEY_Delete:
+        case KeyCodes::KEY_Delete:
             return VK_DELETE;
-        case SL::Input_Lite::KEY_End:
+        case KeyCodes::KEY_End:
             return VK_END;
-        case SL::Input_Lite::KEY_PageDown:
+        case KeyCodes::KEY_PageDown:
             return VK_NEXT;
-        case SL::Input_Lite::KEY_Right:
+        case KeyCodes::KEY_Right:
             return VK_RIGHT;
-        case SL::Input_Lite::KEY_Left:
+        case KeyCodes::KEY_Left:
             return VK_LEFT;
-        case SL::Input_Lite::KEY_Down:
+        case KeyCodes::KEY_Down:
             return VK_DOWN;
-        case SL::Input_Lite::KEY_Up:
+        case KeyCodes::KEY_Up:
             return VK_UP;
-        case SL::Input_Lite::KP_NumLock:
+        case KeyCodes::KP_NumLock:
             return VK_NUMLOCK;
-        case SL::Input_Lite::KP_Divide:
+        case KeyCodes::KP_Divide:
             return VK_DIVIDE;
-        case SL::Input_Lite::KP_Multiply:
+        case KeyCodes::KP_Multiply:
             return VK_MULTIPLY;
-        case SL::Input_Lite::KP_Subtract:
+        case KeyCodes::KP_Subtract:
             return VK_SUBTRACT;
-        case SL::Input_Lite::KP_Add:
+        case KeyCodes::KP_Add:
             return VK_ADD;
-        case SL::Input_Lite::KP_Enter:
+        case KeyCodes::KP_Enter:
             return VK_RETURN;
-        case SL::Input_Lite::KP_1:
-        case SL::Input_Lite::KP_2:
-        case SL::Input_Lite::KP_3:
-        case SL::Input_Lite::KP_4:
-        case SL::Input_Lite::KP_5:
-        case SL::Input_Lite::KP_6:
-        case SL::Input_Lite::KP_7:
-        case SL::Input_Lite::KP_8:
-        case SL::Input_Lite::KP_9:
-            return VK_NUMPAD1 + (key - SL::Input_Lite::KP_1);
-        case SL::Input_Lite::KP_0:
+        case KeyCodes::KP_1:
+        case KeyCodes::KP_2:
+        case KeyCodes::KP_3:
+        case KeyCodes::KP_4:
+        case KeyCodes::KP_5:
+        case KeyCodes::KP_6:
+        case KeyCodes::KP_7:
+        case KeyCodes::KP_8:
+        case KeyCodes::KP_9:
+            return VK_NUMPAD1 + (key - KeyCodes::KP_1);
+        case KeyCodes::KP_0:
             return VK_NUMPAD0;
-        case SL::Input_Lite::KP_Point:
+        case KeyCodes::KP_Point:
             return VK_DECIMAL;
-        case SL::Input_Lite::KEY_Help:
+        case KeyCodes::KEY_Help:
             return VK_HELP;
-        case SL::Input_Lite::KEY_Menu:
+        case KeyCodes::KEY_Menu:
             return VK_MENU;
-        case SL::Input_Lite::KEY_LeftControl:
+        case KeyCodes::KEY_LeftControl:
             return VK_CONTROL;
-        case SL::Input_Lite::KEY_LeftShift:
+        case KeyCodes::KEY_LeftShift:
             return VK_SHIFT;
-        case SL::Input_Lite::KEY_LeftAlt:
+        case KeyCodes::KEY_LeftAlt:
             return VK_MENU;
-        case SL::Input_Lite::KEY_LeftMeta:
+        case KeyCodes::KEY_LeftMeta:
             return VK_LWIN;
-        case SL::Input_Lite::KEY_RightControl:
+        case KeyCodes::KEY_RightControl:
             return VK_CONTROL;
-        case SL::Input_Lite::KEY_RightShift:
+        case KeyCodes::KEY_RightShift:
             return VK_SHIFT;
-        case SL::Input_Lite::KEY_RightAlt:
+        case KeyCodes::KEY_RightAlt:
             return VK_MENU;
-        case SL::Input_Lite::KEY_RightMeta:
+        case KeyCodes::KEY_RightMeta:
             return VK_RWIN;
         default:
             return 255;
