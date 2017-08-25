@@ -3,10 +3,21 @@
 #include <memory>
 #include <string>
 
-#undef DELETE
+#ifdef WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#elif __APPLE__
 
-namespace SL {
-namespace Input_Lite {
+#elif __linux__
+#include <X11/Xlib.h>
+#else
+#error "Unknown Operating System!"
+#endif
+
+namespace SL
+{
+namespace Input_Lite
+{
     // codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
     enum KeyCodes {
         KEY_A = 4,
@@ -132,54 +143,78 @@ namespace Input_Lite {
     };
 
     enum class MouseButtons : unsigned char { LEFT, MIDDLE, RIGHT };
-
+#ifdef WIN32
+    DWORD ConvertToNative(Input_Lite::KeyCodes key);
+    Input_Lite::KeyCodes ConvertToKeyCode(DWORD key);
+#elif __APPLE__
     int ConvertToNative(KeyCodes key);
     KeyCodes ConvertToKeyCode(int key);
+#elif __linux__ 
+    KeyCode ConvertToNative(Input_Lite::KeyCodes key);
+    Input_Lite::KeyCodes ConvertToKeyCode(KeyCode key);
+#else
+#error "Unknown Operating System!"
+#endif
 
-    struct KeyEvent {
+    struct KeyEvent
+    {
         bool Pressed;
         KeyCodes Key;
     };
-    struct MouseButtonEvent {
+    struct MouseButtonEvent
+    {
         bool Pressed;
         MouseButtons Button;
     };
-    struct MouseScrollEvent {
+    struct MouseScrollEvent
+    {
         int Offset;
     };
-    struct MousePositionOffsetEvent {
+    struct MousePositionOffsetEvent
+    {
         int X = 0;
         int Y = 0;
     };
-    struct MousePositionAbsoluteEvent {
+    struct MousePositionAbsoluteEvent
+    {
         int X = 0;
         int Y = 0;
     };
 
-    void SendInput(const KeyEvent &e);
-    void SendInput(const MouseButtonEvent &e);
-    void SendInput(const MouseScrollEvent &e);
-    void SendInput(const MousePositionOffsetEvent &e);
-    void SendInput(const MousePositionAbsoluteEvent &e);
+    void SendInput(const KeyEvent& e);
+    void SendInput(const MouseButtonEvent& e);
+    void SendInput(const MouseScrollEvent& e);
+    void SendInput(const MousePositionOffsetEvent& e);
+    void SendInput(const MousePositionAbsoluteEvent& e);
 
-    class IInputManager {
-      public:
-        virtual ~IInputManager() {}
-        virtual bool PushEvent(const KeyEvent &e) = 0;
-        virtual bool PushEvent(const MouseButtonEvent &e) = 0;
-        virtual bool PushEvent(const MouseScrollEvent &pos) = 0;
-        virtual bool PushEvent(const MousePositionOffsetEvent &pos) = 0;
-        virtual bool PushEvent(const MousePositionAbsoluteEvent &pos) = 0;
+    class IInputManager
+    {
+    public:
+        virtual ~IInputManager()
+        {
+        }
+        virtual bool PushEvent(const KeyEvent& e) = 0;
+        virtual bool PushEvent(const MouseButtonEvent& e) = 0;
+        virtual bool PushEvent(const MouseScrollEvent& pos) = 0;
+        virtual bool PushEvent(const MousePositionOffsetEvent& pos) = 0;
+        virtual bool PushEvent(const MousePositionAbsoluteEvent& pos) = 0;
     };
-    class IInputConfiguration {
-      public:
-        virtual ~IInputConfiguration() {}
+    class IInputConfiguration
+    {
+    public:
+        virtual ~IInputConfiguration()
+        {
+        }
 
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent &)> &cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseButtonEvent &)> &cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseScrollEvent &)> &cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionOffsetEvent &)> &cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionAbsoluteEvent &)> &cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent&)>& cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration>
+        onEvent(const std::function<void(const MouseButtonEvent&)>& cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration>
+        onEvent(const std::function<void(const MouseScrollEvent&)>& cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration>
+        onEvent(const std::function<void(const MousePositionOffsetEvent&)>& cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration>
+        onEvent(const std::function<void(const MousePositionAbsoluteEvent&)>& cb) = 0;
         virtual std::shared_ptr<IInputManager> Build() = 0;
     };
 

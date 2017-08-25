@@ -13,7 +13,11 @@ namespace Input_Lite
     void SendInput(const KeyEvent& e)
     {
         auto display = XOpenDisplay(NULL);
-        XTestFakeKeyEvent(display, ConvertToNative(e.Key), e.Pressed ? True : False, CurrentTime);
+        auto mappedkey = ConvertToNative(e.Key);
+        if(mappedkey == 255)
+            return; // key doesnt exist
+        auto k = XKeysymToKeycode(display, mappedkey);
+        XTestFakeKeyEvent(display, k, e.Pressed ? True : False, CurrentTime);
         XCloseDisplay(display);
     }
     void SendInput(const MouseButtonEvent& e)
@@ -62,83 +66,116 @@ namespace Input_Lite
         XTestFakeMotionEvent(display, -1, e.X, e.Y, CurrentTime);
         XCloseDisplay(display);
     }
-    int ConvertToNative(KeyCodes key)
-    { 
-        switch(key) {
 
+    KeyCode ConvertToNative(Input_Lite::KeyCodes key)
+    {
+        switch(key) {
         case KeyCodes::KEY_A:
+            return 38;
         case KeyCodes::KEY_B:
+            return 56;
         case KeyCodes::KEY_C:
+            return 54;
         case KeyCodes::KEY_D:
+            return 40;
         case KeyCodes::KEY_E:
+            return 26;
         case KeyCodes::KEY_F:
+            return 41;
         case KeyCodes::KEY_G:
+            return 42;
         case KeyCodes::KEY_H:
+            return 43;
         case KeyCodes::KEY_I:
+            return 31;
         case KeyCodes::KEY_J:
+            return 44;
         case KeyCodes::KEY_K:
+            return 45;
         case KeyCodes::KEY_L:
+            return 46;
         case KeyCodes::KEY_M:
+            return 58;
         case KeyCodes::KEY_N:
+            return 57;
         case KeyCodes::KEY_O:
+            return 32;
         case KeyCodes::KEY_P:
+            return 33;
         case KeyCodes::KEY_Q:
+            return 24;
         case KeyCodes::KEY_R:
+            return 27;
         case KeyCodes::KEY_S:
+            return 39;
         case KeyCodes::KEY_T:
+            return 28;
         case KeyCodes::KEY_U:
+            return 30;
         case KeyCodes::KEY_V:
+            return 55;
         case KeyCodes::KEY_W:
+            return 25;
         case KeyCodes::KEY_X:
+            return 53;
         case KeyCodes::KEY_Y:
+            return 29;
         case KeyCodes::KEY_Z:
-            return static_cast<int>('A') + (key - KeyCodes::KEY_A);
+            return 52;
         case KeyCodes::KEY_1:
+            return 10;
         case KeyCodes::KEY_2:
+            return 11;
         case KeyCodes::KEY_3:
+            return 12;
         case KeyCodes::KEY_4:
+            return 13;
         case KeyCodes::KEY_5:
+            return 14;
         case KeyCodes::KEY_6:
+            return 15;
         case KeyCodes::KEY_7:
+            return 16;
         case KeyCodes::KEY_8:
+            return 17;
         case KeyCodes::KEY_9:
-            return static_cast<int>('1') + (key - KeyCodes::KEY_1);
+            return 18;
         case KeyCodes::KEY_0:
-            return static_cast<int>('0');
+            return 19;
         case KeyCodes::KEY_Enter:
-            return XK_Return;
+            return 36;
         case KeyCodes::KEY_Escape:
-            return XK_Escape;
+            return 9;
         case KeyCodes::KEY_Backspace:
-            return XK_BackSpace;
+            return 22;
         case KeyCodes::KEY_Tab:
-            return XK_Tab;
+            return 23;
         case KeyCodes::KEY_Space:
-            return XK_KP_Space;
+            return 65;
         case KeyCodes::KEY_Minus:
-            return XK_minus;
+            return 20;
         case KeyCodes::KEY_Equals:
-            return XK_equal; // this is correct and not a mistype
+            return 21;
         case KeyCodes::KEY_LeftBracket:
-            return XK_bracketleft;
+            return 34;
         case KeyCodes::KEY_RightBracket:
-            return XK_bracketright;
+            return 35;
         case KeyCodes::KEY_Backslash:
-            return XK_backslash;
+            return 51;
         case KeyCodes::KEY_Semicolon:
-            return XK_semicolon;
+            return 47;
         case KeyCodes::KEY_Quote:
-            return XK_quotedbl;
+            return 48;
         case KeyCodes::KEY_Grave:
-            return XK_grave;
+            return 49;
         case KeyCodes::KEY_Comma:
-            return XK_comma;
+            return 59;
         case KeyCodes::KEY_Period:
-            return XK_period;
+            return 60;
         case KeyCodes::KEY_Slash:
-            return XK_slash;
+            return 61;
         case KeyCodes::KEY_CapsLock:
-            return XK_Caps_Lock;
+            return 66;
         case KeyCodes::KEY_F1:
         case KeyCodes::KEY_F2:
         case KeyCodes::KEY_F3:
@@ -149,9 +186,11 @@ namespace Input_Lite
         case KeyCodes::KEY_F8:
         case KeyCodes::KEY_F9:
         case KeyCodes::KEY_F10:
+            return 67 + (key - KeyCodes::KEY_F1);
         case KeyCodes::KEY_F11:
+            return 95;
         case KeyCodes::KEY_F12:
-            return XK_F1 + (key - KeyCodes::KEY_F1);
+            return 96;
         case KeyCodes::KEY_F13:
         case KeyCodes::KEY_F14:
         case KeyCodes::KEY_F15:
@@ -164,260 +203,311 @@ namespace Input_Lite
         case KeyCodes::KEY_F22:
         case KeyCodes::KEY_F23:
         case KeyCodes::KEY_F24:
-            return XK_F13 + (key - KeyCodes::KEY_F13);
+            return 191 + (key - KeyCodes::KEY_F1);
         case KeyCodes::KEY_PrintScreen:
-            return XK_Print;
+            return 107;
         case KeyCodes::KEY_ScrollLock:
-            return XK_Scroll_Lock;
+            return 78;
         case KeyCodes::KEY_Pause:
-            return XK_Pause;
+            return 127;
         case KeyCodes::KEY_Insert:
-            return XK_Insert;
+            return 118;
         case KeyCodes::KEY_Home:
-            return XK_Home;
+            return 110;
         case KeyCodes::KEY_PageUp:
-            return XK_Page_Up;
+            return 112;
         case KeyCodes::KEY_Delete:
-            return XK_Delete;
+            return 119;
         case KeyCodes::KEY_End:
-            return XK_End;
+            return 115;
         case KeyCodes::KEY_PageDown:
-            return XK_Page_Down;
+            return 117;
         case KeyCodes::KEY_Right:
-            return XK_Right;
+            return 114;
         case KeyCodes::KEY_Left:
-            return XK_Left;
+            return 113;
         case KeyCodes::KEY_Down:
-            return XK_Down;
+            return 116;
         case KeyCodes::KEY_Up:
-            return XK_Up;
+            return 111;
         case KeyCodes::KP_NumLock:
-            return XK_Num_Lock;
+            return 77;
         case KeyCodes::KP_Divide:
-            return XK_KP_Divide;
+            return 106;
         case KeyCodes::KP_Multiply:
-            return XK_KP_Multiply;
+            return 63;
         case KeyCodes::KP_Subtract:
-            return XK_KP_Subtract;
+            return 82;
         case KeyCodes::KP_Add:
-            return XK_KP_Add;
+            return 86;
         case KeyCodes::KP_Enter:
-            return XK_KP_Enter;
+            return 104;
         case KeyCodes::KP_1:
+            return 87;
         case KeyCodes::KP_2:
+            return 88;
         case KeyCodes::KP_3:
+            return 89;
         case KeyCodes::KP_4:
+            return 83;
         case KeyCodes::KP_5:
+            return 84;
         case KeyCodes::KP_6:
+            return 85;
         case KeyCodes::KP_7:
+            return 79;
         case KeyCodes::KP_8:
+            return 80;
         case KeyCodes::KP_9:
-            return XK_KP_1 + (key - KeyCodes::KP_1);
+            return 81;
         case KeyCodes::KP_0:
-            return XK_KP_0;
+            return 90;
         case KeyCodes::KP_Point:
-            return XK_KP_Decimal;
+            return 91;
         case KeyCodes::KEY_Help:
-            return XK_Help;
+            return 146;
         case KeyCodes::KEY_Menu:
-            return XK_Menu;
+            return 135;
         case KeyCodes::KEY_LeftControl:
-            return XK_Control_L;
+            return 37;
         case KeyCodes::KEY_LeftShift:
-            return XK_Shift_L;
+            return 50;
         case KeyCodes::KEY_LeftAlt:
-            return XK_Alt_L;
+            return 64;
         case KeyCodes::KEY_LeftMeta:
-            return XK_Meta_L;
-
+            return 133;
         case KeyCodes::KEY_RightControl:
-            return XK_Control_R;
+            return 105;
         case KeyCodes::KEY_RightShift:
-            return XK_Shift_R;
+            return 62;
         case KeyCodes::KEY_RightAlt:
-            return XK_Alt_R;
+            return 108;
         case KeyCodes::KEY_RightMeta:
-            return XK_Meta_R;
+            return 134;
         default:
             return 255;
         }
     }
 
-    KeyCodes ConvertToKeyCode(int key)
+    Input_Lite::KeyCodes ConvertToKeyCode(KeyCode key)
     {
-
         switch(key) {
-        case '0':
-            return KeyCodes::KEY_0;
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            return static_cast<KeyCodes>(KeyCodes::KEY_1 + (key - static_cast<int>('1')));
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-            return static_cast<KeyCodes>(KeyCodes::KEY_A + (key - static_cast<int>('A')));
-        case XK_Return:
-            return KeyCodes::KEY_Enter;
-        case XK_Escape:
+        case 9:
             return KeyCodes::KEY_Escape;
-        case XK_BackSpace:
-            return KeyCodes::KEY_Backspace;
-        case XK_Tab:
-            return KeyCodes::KEY_Tab;
-        case XK_KP_Space:
-            return KeyCodes::KEY_Space;
-        case XK_minus:
+        case 10:
+            return KeyCodes::KEY_1;
+        case 11:
+            return KeyCodes::KEY_2;
+        case 12:
+            return KeyCodes::KEY_3;
+        case 13:
+            return KeyCodes::KEY_4;
+        case 14:
+            return KeyCodes::KEY_5;
+        case 15:
+            return KeyCodes::KEY_6;
+        case 16:
+            return KeyCodes::KEY_7;
+        case 17:
+            return KeyCodes::KEY_8;
+        case 18:
+            return KeyCodes::KEY_9;
+        case 19:
+            return KeyCodes::KEY_0;
+        case 20:
             return KeyCodes::KEY_Minus;
-        case XK_equal:
-            return KeyCodes::KEY_Equals; // this is correct and not a mistype
-        case XK_bracketleft:
+        case 21:
+            return KeyCodes::KEY_Equals;
+        case 22:
+            return KeyCodes::KEY_Backspace;
+        case 23:
+            return KeyCodes::KEY_Tab;
+        case 24:
+            return KeyCodes::KEY_Q;
+        case 25:
+            return KeyCodes::KEY_W;
+        case 26:
+            return KeyCodes::KEY_E;
+        case 27:
+            return KeyCodes::KEY_R;
+        case 28:
+            return KeyCodes::KEY_T;
+        case 29:
+            return KeyCodes::KEY_Y;
+        case 30:
+            return KeyCodes::KEY_U;
+        case 31:
+            return KeyCodes::KEY_I;
+        case 32:
+            return KeyCodes::KEY_O;
+        case 33:
+            return KeyCodes::KEY_P;
+        case 34:
             return KeyCodes::KEY_LeftBracket;
-        case XK_bracketright:
+        case 35:
             return KeyCodes::KEY_RightBracket;
-        case XK_backslash:
-            return KeyCodes::KEY_Backslash;
-        case XK_semicolon:
-            return KeyCodes::KEY_Semicolon;
-        case XK_quotedbl:
-            return KeyCodes::KEY_Quote;
-        case XK_grave:
-            return KeyCodes::KEY_Grave;
-        case XK_comma:
-            return KeyCodes::KEY_Comma;
-        case XK_period:
-            return KeyCodes::KEY_Period;
-        case XK_slash:
-            return KeyCodes::KEY_Slash;
-        case XK_Caps_Lock:
-            return KeyCodes::KEY_CapsLock;
-        case XK_F1:
-        case XK_F2:
-        case XK_F3:
-        case XK_F4:
-        case XK_F5:
-        case XK_F6:
-        case XK_F7:
-        case XK_F8:
-        case XK_F9:
-        case XK_F10:
-        case XK_F11:
-        case XK_F12:
-            return static_cast<KeyCodes>(KeyCodes::KEY_F1 + (key - XK_F1));
-        case XK_F13:
-        case XK_F14:
-        case XK_F15:
-        case XK_F16:
-        case XK_F17:
-        case XK_F18:
-        case XK_F19:
-        case XK_F20:
-        case XK_F21:
-        case XK_F22:
-        case XK_F23:
-        case XK_F24:
-            return static_cast<KeyCodes>(KeyCodes::KEY_F13 + (key - XK_F13));
-        case XK_Print:
-            return KeyCodes::KEY_PrintScreen;
-        case XK_Scroll_Lock:
-            return KeyCodes::KEY_ScrollLock;
-        case XK_Pause:
-            return KeyCodes::KEY_Pause;
-        case XK_Insert:
-            return KeyCodes::KEY_Insert;
-        case XK_Home:
-            return KeyCodes::KEY_Home;
-        case XK_Page_Up:
-            return KeyCodes::KEY_PageUp;
-        case XK_Delete:
-            return KeyCodes::KEY_Delete;
-        case XK_End:
-            return KeyCodes::KEY_End;
-        case XK_Page_Down:
-            return KeyCodes::KEY_PageDown;
-        case XK_Right:
-            return KeyCodes::KEY_Right;
-        case XK_Left:
-            return KeyCodes::KEY_Left;
-        case XK_Down:
-            return KeyCodes::KEY_Down;
-        case XK_Up:
-            return KeyCodes::KEY_Up;
-        case XK_Num_Lock:
-            return KeyCodes::KP_NumLock;
-        case XK_KP_Divide:
-            return KeyCodes::KP_Divide;
-        case XK_KP_Multiply:
-            return KeyCodes::KP_Multiply;
-        case XK_KP_Subtract:
-            return KeyCodes::KP_Subtract;
-        case XK_KP_Add:
-            return KeyCodes::KP_Add;
-        case XK_KP_Enter:
-            return KeyCodes::KP_Enter;
-        case XK_KP_1:
-        case XK_KP_2:
-        case XK_KP_3:
-        case XK_KP_4:
-        case XK_KP_5:
-        case XK_KP_6:
-        case XK_KP_7:
-        case XK_KP_8:
-        case XK_KP_9:
-            return static_cast<KeyCodes>(KeyCodes::KP_1 + (key - XK_KP_1));
-        case XK_KP_0:
-            return KeyCodes::KP_0;
-        case XK_KP_Decimal:
-            return KeyCodes::KP_Point;
-        case XK_Help:
-            return KeyCodes::KEY_Help;
-        case XK_Menu:
-            return KeyCodes::KEY_Menu;
-        case XK_Alt_L:
-            return KeyCodes::KEY_LeftAlt;
-        case XK_Alt_R:
-            return KeyCodes::KEY_RightAlt;
-        case XK_Control_L:
+        case 36:
+            return KeyCodes::KEY_Enter;
+        case 37:
             return KeyCodes::KEY_LeftControl;
-        case XK_Control_R:
-            return KeyCodes::KEY_RightControl;
-        case XK_Shift_L:
+        case 38:
+            return KeyCodes::KEY_A;
+        case 39:
+            return KeyCodes::KEY_S;
+        case 40:
+            return KeyCodes::KEY_D;
+        case 41:
+            return KeyCodes::KEY_F;
+        case 42:
+            return KeyCodes::KEY_G;
+        case 43:
+            return KeyCodes::KEY_H;
+        case 44:
+            return KeyCodes::KEY_J;
+        case 45:
+            return KeyCodes::KEY_K;
+        case 46:
+            return KeyCodes::KEY_L;
+        case 47:
+            return KeyCodes::KEY_Semicolon;
+        case 48:
+            return KeyCodes::KEY_Quote;
+        case 49:
+            return KeyCodes::KEY_Grave;
+        case 50:
             return KeyCodes::KEY_LeftShift;
-        case XK_Shift_R:
+        case 51:
+            return KeyCodes::KEY_Backslash;
+        case 52:
+            return KeyCodes::KEY_Z;
+        case 53:
+            return KeyCodes::KEY_X;
+        case 54:
+            return KeyCodes::KEY_C;
+        case 55:
+            return KeyCodes::KEY_V;
+        case 56:
+            return KeyCodes::KEY_B;
+        case 57:
+            return KeyCodes::KEY_N;
+        case 58:
+            return KeyCodes::KEY_M;
+        case 59:
+            return KeyCodes::KEY_Comma;
+        case 60:
+            return KeyCodes::KEY_Period;
+        case 61:
+            return KeyCodes::KEY_Slash;
+        case 62:
             return KeyCodes::KEY_RightShift;
-        case XK_Meta_L:
+        case 63:
+            return KeyCodes::KP_Multiply;
+        case 64:
+            return KeyCodes::KEY_LeftAlt;
+        case 65:
+            return KeyCodes::KEY_Space;
+        case 66:
+            return KeyCodes::KEY_CapsLock;
+        case 67: // f1
+        case 68:
+        case 69:
+        case 70:
+        case 71:
+        case 72:
+        case 73:
+        case 74:
+        case 75:
+        case 76: // f10
+            return static_cast<KeyCodes>(KeyCodes::KEY_F1 + (key - 67));
+        case 77:
+            return KeyCodes::KP_NumLock;
+        case 78:
+            return KeyCodes::KEY_ScrollLock;
+        case 79:
+            return KeyCodes::KP_7;
+        case 80:
+            return KeyCodes::KP_8;
+        case 81:
+            return KeyCodes::KP_9;
+        case 82:
+            return KeyCodes::KP_Subtract;
+        case 83:
+            return KeyCodes::KP_4;
+        case 84:
+            return KeyCodes::KP_5;
+        case 85:
+            return KeyCodes::KP_6;
+        case 86:
+            return KeyCodes::KP_Add;
+        case 87:
+            return KeyCodes::KP_1;
+        case 88:
+            return KeyCodes::KP_2; 
+        case 89:
+            return KeyCodes::KP_3;
+        case 90:
+            return KeyCodes::KP_0;
+        case 91:
+            return KeyCodes::KP_Point;
+        case 94:
+            return KeyCodes::KEY_NonUSBackslash;
+        case 95:
+            return KeyCodes::KEY_F11;
+        case 96:
+            return KeyCodes::KEY_F12;
+        case 104:
+            return KeyCodes::KP_Enter;
+        case 105:
+            return KeyCodes::KEY_RightControl;
+        case 106:
+            return KeyCodes::KP_Divide;
+        case 107:
+            return KeyCodes::KEY_PrintScreen;
+        case 108:
+            return KeyCodes::KEY_RightAlt;
+        case 110:
+            return KeyCodes::KEY_Home;
+        case 111:
+            return KeyCodes::KEY_Up;
+        case 112:
+            return KeyCodes::KEY_PageUp;
+        case 113:
+            return KeyCodes::KEY_Left;
+        case 114:
+            return KeyCodes::KEY_Right;
+        case 115:
+            return KeyCodes::KEY_End;
+        case 116:
+            return KeyCodes::KEY_Down;
+        case 117:
+            return KeyCodes::KEY_PageDown;
+        case 118:
+            return KeyCodes::KEY_Insert;
+        case 119:
+            return KeyCodes::KEY_Delete;
+        case 125:
+            return KeyCodes::KP_Equals;
+        case 127:
+            return KeyCodes::KEY_Pause; 
+        case 133:
             return KeyCodes::KEY_LeftMeta;
-        case XK_Meta_R:
+        case 134:
             return KeyCodes::KEY_RightMeta;
+        case 135:
+            return KeyCodes::KEY_Menu;
+        case 191://f13
+        case 192:
+        case 193:
+        case 194:
+        case 195:
+        case 196:
+        case 197:
+        case 198:
+        case 199:
+        case 200:
+        case 201:
+        case 202:
+            return static_cast<KeyCodes>(KeyCodes::KEY_F13 + (key - 191));
         default:
             return SL::Input_Lite::KeyCodes::INVALID;
         }
