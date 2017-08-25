@@ -62,8 +62,7 @@ namespace Input_Lite {
     {
         SendMousePosition_Impl((e.X * 65536) / GetSystemMetrics(SM_CXSCREEN), (e.Y * 65536) / GetSystemMetrics(SM_CYSCREEN), MOUSEEVENTF_ABSOLUTE);
     }
-
-    int ConvertToNative(KeyCodes key)
+    DWORD ConvertToNative(KeyCodes key)
     {
         switch (key) {
         case KeyCodes::KEY_A:
@@ -241,7 +240,7 @@ namespace Input_Lite {
             return 255;
         }
     }
-    KeyCodes ConvertToKeyCode(int key)
+    KeyCodes ConvertToKeyCode(DWORD key)
     {
 
         switch (key) {

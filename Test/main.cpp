@@ -18,7 +18,7 @@ using namespace std::chrono_literals;
 #error "Unknown Operating System!"
 #endif
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     std::this_thread::sleep_for(4s);
 
@@ -68,8 +68,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(VK_TAB) == SL::Input_Lite::KeyCodes::KEY_Tab);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_SPACE) == SL::Input_Lite::KeyCodes::KEY_Space);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_MINUS) == SL::Input_Lite::KeyCodes::KEY_Minus);
-    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_PLUS) ==
-           SL::Input_Lite::KeyCodes::KEY_Equals); // this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_PLUS) == SL::Input_Lite::KeyCodes::KEY_Equals); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_4) == SL::Input_Lite::KeyCodes::KEY_LeftBracket);
     assert(SL::Input_Lite::ConvertToKeyCode(VK_OEM_6) == SL::Input_Lite::KeyCodes::KEY_RightBracket);
@@ -203,8 +202,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Tab) == VK_TAB);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Space) == VK_SPACE);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Minus) == VK_OEM_MINUS);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) ==
-           VK_OEM_PLUS); // this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) == VK_OEM_PLUS); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_LeftBracket) == VK_OEM_4);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_RightBracket) == VK_OEM_6);
@@ -343,8 +341,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(XK_Tab) == SL::Input_Lite::KeyCodes::KEY_Tab);
     assert(SL::Input_Lite::ConvertToKeyCode(XK_KP_Space) == SL::Input_Lite::KeyCodes::KEY_Space);
     assert(SL::Input_Lite::ConvertToKeyCode(XK_minus) == SL::Input_Lite::KeyCodes::KEY_Minus);
-    assert(SL::Input_Lite::ConvertToKeyCode(XK_equal) ==
-           SL::Input_Lite::KeyCodes::KEY_Equals); // this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToKeyCode(XK_equal) == SL::Input_Lite::KeyCodes::KEY_Equals); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToKeyCode(XK_bracketleft) == SL::Input_Lite::KeyCodes::KEY_LeftBracket);
     assert(SL::Input_Lite::ConvertToKeyCode(XK_bracketright) == SL::Input_Lite::KeyCodes::KEY_RightBracket);
@@ -478,8 +475,7 @@ int main(int argc, char* argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Tab) == XK_Tab);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Space) == XK_KP_Space);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Minus) == XK_minus);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) ==
-           XK_equal); // this is correct and not a mistype
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Equals) == XK_equal); // this is correct and not a mistype
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_LeftBracket) == XK_bracketleft);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_RightBracket) == XK_bracketright);
@@ -576,39 +572,39 @@ int main(int argc, char* argv[])
 
     return 0;
     std::cout << "Starting Mouse move tests by Offset" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ 100, 100 });
-    for(auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{ 1, 0 });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{100, 100});
+    for (auto x = 0; x < 500; x++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{1, 0});
         std::this_thread::sleep_for(10ms);
     }
-    for(auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{ 0, 1 });
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionOffsetEvent{0, 1});
         std::this_thread::sleep_for(10ms);
     }
     std::cout << "Starting Mouse move tests by Absolute" << std::endl;
-    for(auto x = 0; x < 500; x++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ x, 300 });
+    for (auto x = 0; x < 500; x++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{x, 300});
         std::this_thread::sleep_for(10ms);
     }
-    for(auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{ 500, y });
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MousePositionAbsoluteEvent{500, y});
         std::this_thread::sleep_for(10ms);
     }
     std::cout << "Starting Mouse Click tests right down up" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ true, SL::Input_Lite::MouseButtons::RIGHT });
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ false, SL::Input_Lite::MouseButtons::RIGHT });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{true, SL::Input_Lite::MouseButtons::RIGHT});
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{false, SL::Input_Lite::MouseButtons::RIGHT});
 
     std::cout << "Starting Mouse Click tests left down up" << std::endl;
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ true, SL::Input_Lite::MouseButtons::LEFT });
-    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{ false, SL::Input_Lite::MouseButtons::LEFT });
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{true, SL::Input_Lite::MouseButtons::LEFT});
+    SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{false, SL::Input_Lite::MouseButtons::LEFT});
 
     std::cout << "Starting Mouse wheel tests " << std::endl;
-    for(auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{ 1 });
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{1});
         std::this_thread::sleep_for(10ms);
     }
-    for(auto y = 0; y < 500; y++) {
-        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{ -1 });
+    for (auto y = 0; y < 500; y++) {
+        SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{-1});
         std::this_thread::sleep_for(10ms);
     }
 
