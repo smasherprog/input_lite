@@ -15,9 +15,8 @@ namespace Input_Lite
         auto display = XOpenDisplay(NULL);
         auto mappedkey = ConvertToNative(e.Key);
         if(mappedkey == 255)
-            return; // key doesnt exist
-        auto k = XKeysymToKeycode(display, mappedkey);
-        XTestFakeKeyEvent(display, k, e.Pressed ? True : False, CurrentTime);
+            return; // key doesnt exist 
+        XTestFakeKeyEvent(display, mappedkey, e.Pressed ? True : False, CurrentTime);
         XCloseDisplay(display);
     }
     void SendInput(const MouseButtonEvent& e)
