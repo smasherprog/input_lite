@@ -320,8 +320,8 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(44) == SL::Input_Lite::KeyCodes::KEY_J);
     assert(SL::Input_Lite::ConvertToKeyCode(45) == SL::Input_Lite::KeyCodes::KEY_K);
     assert(SL::Input_Lite::ConvertToKeyCode(46) == SL::Input_Lite::KeyCodes::KEY_L);
-    assert(SL::Input_Lite::ConvertToKeyCode(57) == SL::Input_Lite::KeyCodes::KEY_M);
-    assert(SL::Input_Lite::ConvertToKeyCode(58) == SL::Input_Lite::KeyCodes::KEY_N);
+    assert(SL::Input_Lite::ConvertToKeyCode(58) == SL::Input_Lite::KeyCodes::KEY_M);
+    assert(SL::Input_Lite::ConvertToKeyCode(57) == SL::Input_Lite::KeyCodes::KEY_N);
     assert(SL::Input_Lite::ConvertToKeyCode(32) == SL::Input_Lite::KeyCodes::KEY_O);
     assert(SL::Input_Lite::ConvertToKeyCode(33) == SL::Input_Lite::KeyCodes::KEY_P);
     assert(SL::Input_Lite::ConvertToKeyCode(24) == SL::Input_Lite::KeyCodes::KEY_Q);
@@ -468,7 +468,7 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_W) == 25);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_X) == 53);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Y) == 29);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Z) == 29);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Z) == 52);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Enter) == 36);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_Escape) == 9);

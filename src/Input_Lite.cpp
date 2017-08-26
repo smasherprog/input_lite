@@ -46,5 +46,5 @@ namespace Input_Lite {
         virtual std::shared_ptr<IInputManager> Build() override { return Impl; }
     };
     std::shared_ptr<IInputConfiguration> CreateInputConfiguration() { return std::make_shared<InputConfiguration>(std::make_shared<InputManager>()); }
-}; // namespace Input_Lite
+} // namespace Input_Lite
 } // namespace SL

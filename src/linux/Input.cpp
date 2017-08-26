@@ -202,7 +202,7 @@ namespace Input_Lite
         case KeyCodes::KEY_F22:
         case KeyCodes::KEY_F23:
         case KeyCodes::KEY_F24:
-            return 191 + (key - KeyCodes::KEY_F1);
+            return 191 + (key - KeyCodes::KEY_F13);
         case KeyCodes::KEY_PrintScreen:
             return 107;
         case KeyCodes::KEY_ScrollLock:
@@ -494,6 +494,8 @@ namespace Input_Lite
             return KeyCodes::KEY_RightMeta;
         case 135:
             return KeyCodes::KEY_Menu;
+            case 146:
+            return KeyCodes::KEY_Help;
         case 191://f13
         case 192:
         case 193:
