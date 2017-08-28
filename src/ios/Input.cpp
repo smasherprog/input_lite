@@ -106,7 +106,9 @@ namespace Input_Lite {
             return kVK_ANSI_U;
         case KeyCodes::KEY_V:
             return kVK_ANSI_V;
-        case KeyCodes::KEY_W return kVK_ANSI_W; case KeyCodes::KEY_X:
+        case KeyCodes::KEY_W:
+            return kVK_ANSI_W;
+        case KeyCodes::KEY_X:
             return kVK_ANSI_X;
         case KeyCodes::KEY_Y:
             return kVK_ANSI_Y;
@@ -215,7 +217,7 @@ namespace Input_Lite {
             return kVK_F1;
         case KeyCodes::KEY_F24:
             return kVK_F1;
-        
+        
         case KeyCodes::KEY_PrintScreen:
             return VK_SNAPSHOT;
         case KeyCodes::KEY_ScrollLock:
