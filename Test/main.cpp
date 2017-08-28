@@ -365,16 +365,16 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_F11) == SL::Input_Lite::KeyCodes::KEY_F11);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_F12) == SL::Input_Lite::KeyCodes::KEY_F12);
 
-    //assert(SL::Input_Lite::ConvertToKeyCode(VK_SNAPSHOT) == SL::Input_Lite::KeyCodes::KEY_PrintScreen);
-    //assert(SL::Input_Lite::ConvertToKeyCode(VK_SCROLL) == SL::Input_Lite::KeyCodes::KEY_ScrollLock);
-    //assert(SL::Input_Lite::ConvertToKeyCode(VK_PAUSE) == SL::Input_Lite::KeyCodes::KEY_Pause);
-    //assert(SL::Input_Lite::ConvertToKeyCode(VK_INSERT) == SL::Input_Lite::KeyCodes::KEY_Insert);
+    // assert(SL::Input_Lite::ConvertToKeyCode(VK_SNAPSHOT) == SL::Input_Lite::KeyCodes::KEY_PrintScreen);
+    // assert(SL::Input_Lite::ConvertToKeyCode(VK_SCROLL) == SL::Input_Lite::KeyCodes::KEY_ScrollLock);
+    // assert(SL::Input_Lite::ConvertToKeyCode(VK_PAUSE) == SL::Input_Lite::KeyCodes::KEY_Pause);
+    // assert(SL::Input_Lite::ConvertToKeyCode(VK_INSERT) == SL::Input_Lite::KeyCodes::KEY_Insert);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_Home) == SL::Input_Lite::KeyCodes::KEY_Home);
 
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_PageUp) == SL::Input_Lite::KeyCodes::KEY_PageUp);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_ForwardDelete) == SL::Input_Lite::KeyCodes::KEY_Delete);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_End) == SL::Input_Lite::KeyCodes::KEY_End);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_DownArrow) == SL::Input_Lite::KeyCodes::KEY_PageDown);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_PageDown) == SL::Input_Lite::KeyCodes::KEY_PageDown);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightArrow) == SL::Input_Lite::KeyCodes::KEY_Right);
 
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_LeftArrow) == SL::Input_Lite::KeyCodes::KEY_Left);
