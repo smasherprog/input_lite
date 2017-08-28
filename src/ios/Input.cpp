@@ -5,48 +5,22 @@ namespace SL
 {
     namespace Input_Lite
     {
-
-        void SendKeyUp(char key) {
-          
-        }
-        void SendKeyUp(wchar_t key) {
-          
-        }
-        void SendKeyDown(wchar_t key) {
-          
-        }
-        void SendKeyDown(char key) {
-         
-        }
-        void SendKeyUp(SpecialKeyCodes key) {
+        void SendInput(const KeyEvent& e){
             
         }
-        void SendKeyDown(SpecialKeyCodes key) {
-            
-        }
-        
-        void SendMouseScroll(int offset)
-        {
-            auto ev = CGEventCreateScrollWheelEvent(NULL, kCGScrollEventUnitLine, 1, -offset);
-            if(ev){
-                CGEventPost(kCGHIDEventTap, ev);
-                CFRelease(ev);
-            }
-        }
-        void SendMouse_Impl(const MouseButtons button, bool pressed)
-        {
+        void SendInput(const MouseButtonEvent& e){
             auto msevent = CGEventCreate(NULL);
             auto loc = CGEventGetLocation(msevent);
             CFRelease(msevent);
             
             CGEventRef ev = nullptr;
-            switch(button) {
+            switch(e.Button) {
                 case MouseButtons::LEFT:
-                    ev = CGEventCreateMouseEvent(NULL, pressed ? kCGEventLeftMouseDown: kCGEventLeftMouseUp, loc, kCGMouseButtonLeft);
+                    ev = CGEventCreateMouseEvent(NULL, e.Pressed ? kCGEventLeftMouseDown: kCGEventLeftMouseUp, loc, kCGMouseButtonLeft);
                 case MouseButtons::MIDDLE:
-                    ev = CGEventCreateMouseEvent(NULL, pressed ? kCGEventOtherMouseDown: kCGEventOtherMouseUp, loc, kCGMouseButtonCenter);
+                    ev = CGEventCreateMouseEvent(NULL, e.Pressed ? kCGEventOtherMouseDown: kCGEventOtherMouseUp, loc, kCGMouseButtonCenter);
                 case MouseButtons::RIGHT:
-                    ev = CGEventCreateMouseEvent(NULL, pressed ? kCGEventRightMouseDown: kCGEventRightMouseUp, loc, kCGMouseButtonRight);
+                    ev = CGEventCreateMouseEvent(NULL, e.Pressed ? kCGEventRightMouseDown: kCGEventRightMouseUp, loc, kCGMouseButtonRight);
                 default:
                     break;
             }
@@ -55,27 +29,27 @@ namespace SL
                 CFRelease(ev);
             }
         }
-        void SendMouseUp(const MouseButtons button){
-            SendMouse_Impl(button, false);
-		}
-        void SendMouseDown(const MouseButtons button){
-            SendMouse_Impl(button, true);
-		}
-        
-        void SendMousePosition(const Offset& offset){
+        void SendInput(const MouseScrollEvent& e){
+            auto ev = CGEventCreateScrollWheelEvent(NULL, kCGScrollEventUnitLine, 1, -e.Offset);
+            if(ev){
+                CGEventPost(kCGHIDEventTap, ev);
+                CFRelease(ev);
+            }
+        }
+        void SendInput(const MousePositionOffsetEvent& e){
             auto msevent = CGEventCreate(NULL);
             auto loc = CGEventGetLocation(msevent);
             CFRelease(msevent);
-            loc.x+=offset.X;
-            loc.y += offset.Y;
-			CGWarpMouseCursorPosition(loc);
-		}
-        void SendMousePosition(const AbsolutePos& absolute){
+            loc.x+=e.X;
+            loc.y += e.Y;
+            CGWarpMouseCursorPosition(loc);
+        }
+        void SendInput(const MousePositionAbsoluteEvent& e){
             CGPoint p;
-            p.x = absolute.X;
-            p.y = absolute.Y;
-			CGWarpMouseCursorPosition(p);
-        
-		}
+            p.x = e.X;
+            p.y = e.Y;
+            CGWarpMouseCursorPosition(p);
+        }
+
     }
 }
