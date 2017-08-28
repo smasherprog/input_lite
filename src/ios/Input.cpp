@@ -6,7 +6,11 @@ namespace SL
     namespace Input_Lite
     {
         void SendInput(const KeyEvent& e){
-            
+            auto ev = CGEventCreateKeyboardEvent (NULL, (CGKeyCode)56, e.Pressed);
+            if(ev){
+                CGEventPost(kCGHIDEventTap, ev);
+                CFRelease(ev);
+            }
         }
         void SendInput(const MouseButtonEvent& e){
             auto msevent = CGEventCreate(NULL);
@@ -49,6 +53,12 @@ namespace SL
             p.x = e.X;
             p.y = e.Y;
             CGWarpMouseCursorPosition(p);
+        }
+        CGKeyCode ConvertToNative(KeyCodes key){
+            
+        }
+        KeyCodes ConvertToKeyCode(CGKeyCode key){
+            
         }
 
     }
