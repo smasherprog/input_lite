@@ -1,5 +1,6 @@
 #include "Input_Lite.h"
 #include <ApplicationServices/ApplicationServices.h>
+#include <Carbon/Carbon.h>
 
 namespace SL {
 namespace Input_Lite {
@@ -127,7 +128,7 @@ namespace Input_Lite {
         case kVK_ANSI_S:
             return KeyCodes::KEY_S;
         case kVK_ANSI_T:
-            return KeyUodes::KEY_T;
+            return KeyCodes::KEY_T;
         case kVK_ANSI_U:
             return KeyCodes::KEY_U;
         case kVK_ANSI_V:
@@ -236,7 +237,7 @@ namespace Input_Lite {
             return KeyCodes::KEY_Right;
         case kVK_LeftArrow:
             return KeyCodes::KEY_Left;
-        case kVK_PageDown:
+        case kVK_DownArrow:
             return KeyCodes::KEY_Down;
         case kVK_UpArrow:
             return KeyCodes::KEY_Up;
@@ -284,8 +285,6 @@ namespace Input_Lite {
             return KeyCodes::KEY_LeftControl;
         case kVK_Shift:
             return KeyCodes::KEY_LeftShift;
-        case kVK_Option:
-            return KeyCodes::KEY_Menu;
         case kVK_Command:
             return KeyCodes::KEY_LeftMeta;
         case kVK_RightControl:
@@ -294,8 +293,6 @@ namespace Input_Lite {
             return KeyCodes::KEY_RightShift;
         case kVK_RightOption:
             return KeyCodes::KEY_RightAlt;
-        case kVK_RightControl:
-            return KeyCodes::KEY_RightMeta;
         default:
             return SL::Input_Lite::KeyCodes::INVALID;
         }

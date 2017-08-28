@@ -378,7 +378,7 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightArrow) == SL::Input_Lite::KeyCodes::KEY_Right);
 
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_LeftArrow) == SL::Input_Lite::KeyCodes::KEY_Left);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_PageDown) == SL::Input_Lite::KeyCodes::KEY_Down);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_DownArrow) == SL::Input_Lite::KeyCodes::KEY_Down);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_UpArrow) == SL::Input_Lite::KeyCodes::KEY_Up);
     // assert(SL::Input_Lite::ConvertToKeyCode(VK_NUMLOCK) == SL::Input_Lite::KeyCodes::KP_NumLock);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_KeypadDivide) == SL::Input_Lite::KeyCodes::KP_Divide);
@@ -388,16 +388,16 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_KeypadPlus) == SL::Input_Lite::KeyCodes::KP_Add);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_KeypadEnter) == SL::Input_Lite::KeyCodes::KP_Enter);
 
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad0) == SL::Input_Lite::KeyCodes::KP_1);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad1) == SL::Input_Lite::KeyCodes::KP_2);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad2) == SL::Input_Lite::KeyCodes::KP_3);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad3) == SL::Input_Lite::KeyCodes::KP_4);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad4) == SL::Input_Lite::KeyCodes::KP_5);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad5) == SL::Input_Lite::KeyCodes::KP_6);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad6) == SL::Input_Lite::KeyCodes::KP_7);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad7) == SL::Input_Lite::KeyCodes::KP_8);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad8) == SL::Input_Lite::KeyCodes::KP_9);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad9) == SL::Input_Lite::KeyCodes::KP_0);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad0) == SL::Input_Lite::KeyCodes::KP_0);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad1) == SL::Input_Lite::KeyCodes::KP_1);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad2) == SL::Input_Lite::KeyCodes::KP_2);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad3) == SL::Input_Lite::KeyCodes::KP_3);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad4) == SL::Input_Lite::KeyCodes::KP_4);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad5) == SL::Input_Lite::KeyCodes::KP_5);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad6) == SL::Input_Lite::KeyCodes::KP_6);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad7) == SL::Input_Lite::KeyCodes::KP_7);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad8) == SL::Input_Lite::KeyCodes::KP_8);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_Keypad9) == SL::Input_Lite::KeyCodes::KP_9);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_ANSI_KeypadDecimal) == SL::Input_Lite::KeyCodes::KP_Point);
 
     // assert(SL::Input_Lite::ConvertToKeyCode(255) == SL::Input_Lite::KeyCodes::KEY_NonUSBackslash);
@@ -421,12 +421,12 @@ int main(int argc, char *argv[])
 
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_Control) == SL::Input_Lite::KeyCodes::KEY_LeftControl);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_Shift) == SL::Input_Lite::KeyCodes::KEY_LeftShift);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_Option) == SL::Input_Lite::KeyCodes::KEY_Menu);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_Command) == SL::Input_Lite::KeyCodes::KEY_LeftMeta);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_Option) == SL::Input_Lite::KeyCodes::KEY_LeftMeta);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_Command) == SL::Input_Lite::KeyCodes::KEY_LeftAlt);
 
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightControl) == SL::Input_Lite::KeyCodes::KEY_RightControl);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightShift) == SL::Input_Lite::KeyCodes::KEY_RightShift);
-    assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightOption) == SL::Input_Lite::KeyCodes::KEY_RightAlt);
+    assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightOption) == SL::Input_Lite::KeyCodes::KEY_RightMeta);
     assert(SL::Input_Lite::ConvertToKeyCode(kVK_RightControl) == SL::Input_Lite::KeyCodes::KEY_RightMeta);
 
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_0) == kVK_ANSI_0);
@@ -538,14 +538,14 @@ int main(int argc, char *argv[])
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_NonUSBackslash) == 255);
     assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KP_Equals) == kVK_ANSI_KeypadEquals);
 
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F13) == VK_F13);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F14) == VK_F14);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F15) == VK_F15);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F16) == VK_F16);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F17) == VK_F17);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F18) == VK_F18);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F19) == VK_F19);
-    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F20) == VK_F20);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F13) == kVK_F13);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F14) == kVK_F14);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F15) == kVK_F15);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F16) == kVK_F16);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F17) == kVK_F17);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F18) == kVK_F18);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F19) == kVK_F19);
+    assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F20) == kVK_F20);
     /*
      assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F21) == VK_F21);
      assert(SL::Input_Lite::ConvertToNative(SL::Input_Lite::KeyCodes::KEY_F22) == VK_F22);
