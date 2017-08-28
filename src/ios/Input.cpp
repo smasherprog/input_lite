@@ -481,7 +481,7 @@ namespace Input_Lite {
             return KeyCodes::KEY_Right;
         case kVK_LeftArrow:
             return KeyCodes::KEY_Left;
-        case kVK_PageDown:
+        case kVK_DownArrow:
             return KeyCodes::KEY_Down;
         case kVK_UpArrow:
             return KeyCodes::KEY_Up;
