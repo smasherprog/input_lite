@@ -1,5 +1,6 @@
 #include "Input_Lite.h"
 #include <ApplicationServices/ApplicationServices.h>
+#include <Carbon/Carbon.h>
 
 namespace SL {
 namespace Input_Lite {
@@ -214,7 +215,7 @@ namespace Input_Lite {
             return kVK_F1;
         case KeyCodes::KEY_F24:
             return kVK_F1;
-        
+        
         case KeyCodes::KEY_PrintScreen:
             return VK_SNAPSHOT;
         case KeyCodes::KEY_ScrollLock:
