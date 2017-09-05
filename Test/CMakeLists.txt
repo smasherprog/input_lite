@@ -1,19 +1,30 @@
-project(Input_Lite_Test)
+project(input_lite_test)
 
-
-if(MSVC)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+if(APPLE)
+	find_library(corefoundation_lib CoreFoundation)
+	find_library(cocoa_lib Cocoa)
+	set(INPUT_LITE_PLATFORM_LIBS ${corefoundation_lib} ${cocoa_lib})
 else()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
+	find_package(X11 REQUIRED)
+	if(!X11_XTest_FOUND)
+ 		message(FATAL_ERROR "X11 extensions are required, but not found!")
+	endif()
+	if(!X11_Xfixes_LIB)
+ 		message(FATAL_ERROR "X11 fixes extension is required, but not found!")
+	endif()
+	find_package(Threads REQUIRED)
+	set(INPUT_LITE_PLATFORM_LIBS
+		${X11_LIBRARIES}
+		${X11_Xfixes_LIB}
+		${X11_XTest_LIB}
+		${CMAKE_THREAD_LIBS_INIT}
+	)
+	
 endif()
 
-set(${PROJECT_NAME}_EXAMPLE_SRC 
-	main.cpp
-)
 
-include_directories(${INPUT_LITE_INCLUDE_DIRS})
 
-add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_EXAMPLE_SRC} ${${PROJECT_NAME}_PLATFORM_SRC})
-target_link_libraries(${PROJECT_NAME} ${INPUT_LITE_LIBS} )
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} input_lite ${INPUT_LITE_PLATFORM_LIBS})
 
 add_test (NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
