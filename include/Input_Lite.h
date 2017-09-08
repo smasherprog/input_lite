@@ -14,10 +14,21 @@
 #error "Unknown Operating System!"
 #endif
 
-namespace SL
-{
-namespace Input_Lite
-{
+#if defined(WINDOWS) || defined(WIN32)
+#if defined(INPUT_LITE_DLL)
+#define INPUT_LITE_EXTERN __declspec(dllexport)
+#define INPUT_EXPIMP_TEMPLATE
+#else
+#define INPUT_LITE_EXTERN
+#define INPUT_EXPIMP_TEMPLATE extern
+#endif
+#else
+#define INPUT_LITE_EXTERN
+#define INPUT_EXPIMP_TEMPLATE
+#endif
+
+namespace SL {
+namespace Input_Lite {
     // codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
     enum KeyCodes {
         KEY_A = 4,
@@ -144,80 +155,65 @@ namespace Input_Lite
 
     enum class MouseButtons : unsigned char { LEFT, MIDDLE, RIGHT };
 #ifdef WIN32
-    DWORD ConvertToNative(Input_Lite::KeyCodes key);
-    Input_Lite::KeyCodes ConvertToKeyCode(DWORD key);
+    INPUT_LITE_EXTERN DWORD ConvertToNative(Input_Lite::KeyCodes key);
+    INPUT_LITE_EXTERN Input_Lite::KeyCodes ConvertToKeyCode(DWORD key);
 #elif __APPLE__
-    CGKeyCode ConvertToNative(KeyCodes key);
-    KeyCodes ConvertToKeyCode(CGKeyCode key);
-#elif __linux__ 
-    KeyCode ConvertToNative(Input_Lite::KeyCodes key);
-    Input_Lite::KeyCodes ConvertToKeyCode(KeyCode key);
+    INPUT_LITE_EXTERN CGKeyCode ConvertToNative(KeyCodes key);
+    INPUT_LITE_EXTERN KeyCodes ConvertToKeyCode(CGKeyCode key);
+#elif __linux__
+    INPUT_LITE_EXTERN KeyCode ConvertToNative(Input_Lite::KeyCodes key);
+    INPUT_LITE_EXTERN Input_Lite::KeyCodes ConvertToKeyCode(KeyCode key);
 #else
 #error "Unknown Operating System!"
 #endif
 
-    struct KeyEvent
-    {
+    struct KeyEvent {
         bool Pressed;
         KeyCodes Key;
     };
-    struct MouseButtonEvent
-    {
+    struct MouseButtonEvent {
         bool Pressed;
         MouseButtons Button;
     };
-    struct MouseScrollEvent
-    {
+    struct MouseScrollEvent {
         int Offset;
     };
-    struct MousePositionOffsetEvent
-    {
+    struct MousePositionOffsetEvent {
         int X = 0;
         int Y = 0;
     };
-    struct MousePositionAbsoluteEvent
-    {
+    struct MousePositionAbsoluteEvent {
         int X = 0;
         int Y = 0;
     };
 
-    void SendInput(const KeyEvent& e);
-    void SendInput(const MouseButtonEvent& e);
-    void SendInput(const MouseScrollEvent& e);
-    void SendInput(const MousePositionOffsetEvent& e);
-    void SendInput(const MousePositionAbsoluteEvent& e);
+    INPUT_LITE_EXTERN void SendInput(const KeyEvent &e);
+    INPUT_LITE_EXTERN void SendInput(const MouseButtonEvent &e);
+    INPUT_LITE_EXTERN void SendInput(const MouseScrollEvent &e);
+    INPUT_LITE_EXTERN void SendInput(const MousePositionOffsetEvent &e);
+    INPUT_LITE_EXTERN void SendInput(const MousePositionAbsoluteEvent &e);
 
-    class IInputManager
-    {
-    public:
-        virtual ~IInputManager()
-        {
-        }
-        virtual bool PushEvent(const KeyEvent& e) = 0;
-        virtual bool PushEvent(const MouseButtonEvent& e) = 0;
-        virtual bool PushEvent(const MouseScrollEvent& pos) = 0;
-        virtual bool PushEvent(const MousePositionOffsetEvent& pos) = 0;
-        virtual bool PushEvent(const MousePositionAbsoluteEvent& pos) = 0;
+    class INPUT_LITE_EXTERN IInputManager {
+      public:
+        virtual ~IInputManager() {}
+        virtual bool PushEvent(const KeyEvent &e) = 0;
+        virtual bool PushEvent(const MouseButtonEvent &e) = 0;
+        virtual bool PushEvent(const MouseScrollEvent &pos) = 0;
+        virtual bool PushEvent(const MousePositionOffsetEvent &pos) = 0;
+        virtual bool PushEvent(const MousePositionAbsoluteEvent &pos) = 0;
     };
-    class IInputConfiguration
-    {
-    public:
-        virtual ~IInputConfiguration()
-        {
-        }
+    class INPUT_LITE_EXTERN IInputConfiguration {
+      public:
+        virtual ~IInputConfiguration() {}
 
-        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent&)>& cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration>
-        onEvent(const std::function<void(const MouseButtonEvent&)>& cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration>
-        onEvent(const std::function<void(const MouseScrollEvent&)>& cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration>
-        onEvent(const std::function<void(const MousePositionOffsetEvent&)>& cb) = 0;
-        virtual std::shared_ptr<IInputConfiguration>
-        onEvent(const std::function<void(const MousePositionAbsoluteEvent&)>& cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const KeyEvent &)> &cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseButtonEvent &)> &cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MouseScrollEvent &)> &cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionOffsetEvent &)> &cb) = 0;
+        virtual std::shared_ptr<IInputConfiguration> onEvent(const std::function<void(const MousePositionAbsoluteEvent &)> &cb) = 0;
         virtual std::shared_ptr<IInputManager> Build() = 0;
     };
 
-    std::shared_ptr<IInputConfiguration> CreateInputConfiguration();
+    INPUT_LITE_EXTERN std::shared_ptr<IInputConfiguration> CreateInputConfiguration();
 } // namespace Input_Lite
 } // namespace SL
