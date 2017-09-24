@@ -4,7 +4,6 @@ project(input_lite)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-option(BUILD_SHARED_LIBS "Build the shared library" OFF)
 option(BUILD_EXAMPLE "Build example" ON)
 
 if(MSVC)
@@ -50,7 +49,7 @@ add_library(${PROJECT_NAME}
 	${INPUT_LITE_PLATFORM_SRC}
 )
 
- if(BUILD_SHARED_LIBS)	
+ if(${BUILD_SHARED_LIBS})	
 	set_target_properties(${PROJECT_NAME} PROPERTIES DEFINE_SYMBOL INPUT_LITE_DLL)
 	if(APPLE)
 		find_package(Threads REQUIRED)
@@ -76,6 +75,7 @@ add_library(${PROJECT_NAME}
 endif()
 
 install (TARGETS ${PROJECT_NAME}  
+	RUNTIME DESTINATION bin
 	ARCHIVE DESTINATION lib
 	LIBRARY DESTINATION lib
 )
