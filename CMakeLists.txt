@@ -45,6 +45,7 @@ include_directories(
 	${INPUT_LITE_PLATFORM_INC}
 )
 add_library(${PROJECT_NAME} 
+	include/Input_Lite.h 
 	src/InputManager.cpp 
 	src/Input_Lite.cpp
 	${INPUT_LITE_PLATFORM_SRC}
