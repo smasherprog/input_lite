@@ -17,20 +17,17 @@
 #if defined(WINDOWS) || defined(WIN32)
 #if defined(INPUT_LITE_DLL)
 #define INPUT_LITE_EXTERN __declspec(dllexport)
-#define INPUT_EXPIMP_TEMPLATE
 #else
 #define INPUT_LITE_EXTERN
-#define INPUT_EXPIMP_TEMPLATE extern
 #endif
 #else
 #define INPUT_LITE_EXTERN
-#define INPUT_EXPIMP_TEMPLATE
 #endif
 
 namespace SL {
 namespace Input_Lite {
     // codes are from http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
-    enum KeyCodes {
+    enum KeyCodes : unsigned char {
         KEY_A = 4,
         KEY_B = 5,
         KEY_C = 6,
